@@ -1,0 +1,329 @@
+@font-face {
+  /* 1. Dale un nombre a tu fuente para usarla en el resto del CSS */
+  font-family: 'VHS';
+
+  /* 2. Indica la ruta a los archivos. El navegador usará el primero que entienda */
+  /* Se pone woff2 primero porque es el más moderno y eficiente */
+  src: url('https://raw.githubusercontent.com/pasto18/copia-web/main/fonts/vhs-vcr-osd-webfont.woff2') format('woff2'),
+       url('https://raw.githubusercontent.com/pasto18/copia-web/main/fonts/vhs-vcr-osd-webfont.woff') format('woff');
+
+  /* 3. Define el grosor y estilo (opcional pero recomendado) */
+  font-weight: normal; /* o 400 */
+  font-style: normal;
+
+  /* 4. Mejora la carga (muy recomendado) */
+  font-display: swap; /* Muestra un texto de sistema mientras carga la fuente, evitando una página en blanco */
+}
+
+.img-galeria-1 {
+    border-radius: 20px;
+    max-width: 90%;
+    height: auto;
+    margin-top: 30px;
+}
+
+ 	.no-select {
+            user-select: none;
+        }
+
+    .draggable {
+            position: absolute;
+            cursor: grab;
+            /* Ponemos las imágenes en posiciones iniciales distintas para que no se apilen */
+            z-index: 10; /* z-index por defecto */
+			border-radius: 22px;
+    	max-width: 90%;
+    	height: auto;
+    	margin-top: 30px;
+        }
+        
+        /* Estilos para cuando una imagen se está arrastrando */
+    .dragging {
+            cursor: grabbing;
+            z-index: 20; /* Se pone por encima de las demás */
+            transform: scale(1.05); /* Efecto de 'levantar' */
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transition: transform 0.4s, box-shadow 0.2s;
+        }
+
+	.menu-estilo {
+
+    /* Si quieres que los botones de habilidades tengan una disposición específica: */
+    position: absolute;
+    z-index: 999;
+    display: flex;
+    margin-left: 59px;
+    flex-wrap: wrap;
+    top:31%;
+    justify-content: left; /* Centra los spans horizontalmente */
+    gap: .5rem;
+    scale:180%;             /* Espacio uniforme entre todos los spans/botones */
+    
+    width: 6%; /* Para que ocupe todo el ancho disponible del .titulo-estilo */
+}
+
+.button-1 {
+	font-size: 100%;
+	font-family: "Quicksand", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: 700;
+	line-height: 1.1;
+	letter-spacing: 0em;
+	font-variation-settings: 'slnt' 0, 'MONO' 0;
+	color: #ff0000;
+	display: inline-block;
+	border-color: #ff0000;
+	border-style: solid;
+	border-radius: 999rem;
+	padding-top: 0.4rem;
+	padding-right: 1.1rem;
+	padding-bottom: 0.4rem;
+	padding-left: 1.05rem;
+	border-width: 0.2rem;
+	filter: drop-shadow(0.4rem 0.4rem 0rem #ff0000);
+	transition: scale 0.1s ease-in-out; /* Mueve la transición aquí */
+	will-change: filter;
+	background: #e3ec3d;
+	text-decoration: none;
+
+}
+
+.button-1 a {
+	color: #ff0000;
+	text-decoration: none;
+}
+
+.button-1 a.active {
+	color: #ff0000;
+	text-decoration: none;
+}
+
+.button-1:hover {
+    scale: 1.15;
+}
+
+.button-2 {
+	font-size: .8rem;
+	font-family: "Quicksand", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: 700;
+	line-height: 1.1;
+	letter-spacing: 0em;
+	font-variation-settings: 'slnt' 0, 'MONO' 0;
+	color: #ff0000;
+	display: inline-block;
+	border-color: #ff0000;
+	border-style: solid;
+	border-radius: 999rem;
+	padding-top: 0.2rem;
+	padding-right: .3rem;
+	padding-bottom: 0.2rem;
+	padding-left: .3rem;
+	border-width: 1px;
+	transition: scale 0.1s ease-in-out; /* Mueve la transición aquí */
+	will-change: filter;
+	filter: drop-shadow(3px 3px 0rem #ff0000);
+	background: #ffd500;
+	text-decoration: none;
+
+      user-select: none;
+    cursor: default;
+
+}
+
+.button-2 a {
+	color: #ff0000;
+	text-decoration: none;
+}
+
+.button-2 a.active {
+	color: #ff0000;
+	text-decoration: none;
+}
+
+.button-2:hover {
+    scale: 1.15;
+}
+
+.titulo-estilo {
+    /* --- Posicionamiento y comportamiento Sticky --- */
+    position: fixed;
+    margin-left: 1.5rem;
+    margin-top: -3rem;
+    top: 0; 
+    z-index: 800;
+    
+    /* --- Escala y Transformaciones --- */
+    transform: translateX(2%); /* Ajusta el valor negativo de translateY */    transform-origin: top left;
+ 
+    /* --- Estilos de Fuente y Texto (serán heredados por los hijos) --- */
+    font-family: "VHS", system-ui;
+  	font-weight: 100;
+  	font-style: normal;
+  	font-size: 12rem;         /* Tamaño de la fuente base para el contenido dentro de este div *//* Grosor de la fuente (700 es 'bold') */
+    color: #e6ff00;             /* Color del texto (un gris claro, por ejemplo) */
+    text-transform: uppercase;  /* Transforma todo el texto a mayúsculas */
+    letter-spacing: -8px;        /* Añade un poco de espacio entre las letras */
+   	text-shadow: rgba(255, 0, 0, 0.91) 13px 15px;
+    
+    
+    /* --- Dimensiones y Espaciado --- */
+    max-width: 100%;
+    padding: 0rem;
+    height: 0;
+	font-style: normal;
+	font-weight: 400;
+
+    user-select: none;
+    cursor: default;
+    pointer-events: none;
+}
+
+.habilidades-estilo {
+    position: fixed;
+    margin-left: 32%;
+    margin-top: 16%;
+    transform: translateY(60px);
+    top: 1rem;
+    scale: 1.6;
+    z-index: 801;
+    /* Agregar estas propiedades para mantener la posición inicial */
+    left: 0;
+    right: 0;
+    width: 100%;
+
+      user-select: none;
+    cursor: default;
+}
+
+.menu-hor-estilo {
+    position: fixed;
+    top: 2%;
+    z-index: 900;
+    
+    /* --- FORZAMOS EL ANCHO Y POSICIÓN RELATIVOS A LA VENTANA --- */
+    width: 97%; /* 100vw = 100% del ANCHO DEL VIEWPORT (ventana) */
+    left: 0;      /* Anclamos el inicio del div al borde izquierdo de la ventana */
+    
+    /* --- AHORA, USAMOS FLEXBOX PARA ALINEAR LOS BOTONES DENTRO DE NUESTRO CONTENEDOR --- */
+    display: flex;
+    justify-content: flex-end; /* Empuja los botones al final (derecha) */
+
+    /* --- ESTILOS ADICIONALES PARA MEJOR APARIENCIA --- */
+    padding-right: 6rem;   /* Añade un espacio para que los botones no se peguen al borde */
+    box-sizing: border-box;/* Importante para que el padding no cause desbordamiento */
+    scale: 1.2; /* Mantenemos tu escala */
+    gap: 1rem; /* Un poco de espacio entre los botones */
+}
+
+
+
+
+
+
+.video-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.video-container video,
+.video-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+
+.caption-title {
+	--text-style: "CAPTION TITLE";
+	font-size: 1.50rem;
+	font-weight: 500;
+	color: #000000;
+    background: #00fff9;
+   	margin-right: 16px;
+	font-family: "Diatype Variable";
+	font-style: normal;
+	line-height: 1;
+	letter-spacing: -0.001em;
+	display: block;
+	font-variation-settings: 'slnt' 0, 'MONO' 0;
+    mix-blend-mode: difference;
+}
+
+.caption {
+	opacity: 80%;
+    margin-top: -40px;
+    margin-left: 15px;        /* Nuevo: margen izquierdo */
+    margin-right: 15px;       /* Nuevo: margen derecho */
+    text-align: left;
+    width: calc(98%); /* Ajustado para considerar los márgenes */
+    box-sizing: border-box;
+    color: #000000;
+	font-family: "Bricolage Grotesque", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: <weight>;
+  	font-style: normal;
+  	font-variation-settings:"wdth" 100;
+    background: #00fff9;
+    padding: 0px 2px; /* Reducido el padding vertical a 0px */
+    border-radius: 0px;
+	padding: -10px 2px;  /* Reducido el padding vertical a -5px */
+    line-height: .85;     /* Añadido line-height para comprimir verticalmente */
+
+    font-size: 18px;
+    mix-blend-mode: difference;
+}
+
+.caption-secondary {
+	opacity: 80%;
+   margin-top: 5px;
+    margin-left: 5px;        /* Nuevo: margen izquierdo */
+    margin-right: 5px;       /* Nuevo: margen derecho */
+    text-align: left;
+    width: calc(100% - 15px); /* Ajustado para considerar los márgenes */
+    box-sizing: border-box;
+    color: #fbff00;
+font-family: "Bricolage Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:"wdth" 100;
+	padding: -5px 2px;  /* Reducido el padding vertical a -5px */
+    line-height: .5;     /* Añadido line-height para comprimir verticalmente */
+    border-radius: 0px;
+    font-size: 15px;
+    mix-blend-mode: difference;
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.heartbeat-1 {
+    animation: heartbeat 2s ease-in-out infinite;
+    animation-delay: 0s;
+    display: inline-block; /* Mantiene el flujo original */
+}
+
+.heartbeat-2 {
+    animation: heartbeat 2s ease-in-out infinite;
+    animation-delay: 0.5s;
+    display: inline-block; /* Mantiene el flujo original */
+}
+
+.heartbeat-3 {
+    animation: heartbeat 2s ease-in-out infinite;
+    animation-delay: 1s;
+    display: inline-block; /* Mantiene el flujo original */
+}

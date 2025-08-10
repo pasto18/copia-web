@@ -1,0 +1,42 @@
+<div id="dropZone" style="
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 200px;
+    height: 200px;
+    background: rgba(0,0,0,0.2);
+    border: 2px dashed #fff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;">
+    Arrastra imágenes aquí
+</div>
+
+<script>
+const dropZone = document.getElementById('dropZone');
+
+dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.style.background = 'rgba(0,0,0,0.4)';
+});
+
+dropZone.addEventListener('dragleave', () => {
+    dropZone.style.background = 'rgba(0,0,0,0.2)';
+});
+
+dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.style.background = 'rgba(0,0,0,0.2)';
+    
+    const files = [...e.dataTransfer.files];
+    const imageCode = files.map(file => {
+        const randomWidth = Math.floor(Math.random() * (500 - 300 + 1) + 300);
+        return `    { src: "images/IMG/${file.name}", width: "${randomWidth}px", alt: "${file.name.split('.')[0]}" },`;
+    }).join('\n');
+    
+    console.log('Código generado:');
+    console.log(imageCode);
+});
+</script>

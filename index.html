@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include 'head.html'; ?>
+    <title>COPIA</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: sans-serif;
+            padding: 20px;
+            /* Evita barras de scroll si los elementos se salen */
+            overflow: hidden; 
+        }
+
+        .no-select {
+            user-select: none;
+        }
+
+        .draggable {
+            position: absolute;
+            cursor: grab;
+            z-index: 10;
+            border: 0px solid rgba(255, 255, 255, 0.2); /* Borde sutil para ver los límites */
+            border-radius: 8px; /* Bordes redondeados */
+        }
+        
+        .dragging {
+            cursor: grabbing;
+            z-index: 20;
+            transform: scale(1.10);
+            box-shadow: 0 0px 0px rgba(0,0,0,0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-color: rgba(255, 255, 255, 0);
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: 30%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <video class="background-video" autoplay loop muted playsinline>
+        <source src="https://res.cloudinary.com/djddsm416/video/upload/v1754604890/TV_STATIC_4K_60FPS_bjfnpa.mp4" type="video/mp4">
+    </video>
+
+<div class="menu-estilo">
+            <a class="button-1" href="video.html" rel="history">VIDEO</a>
+            <a class="button-1" href="img.html" rel="history">IMG</a>
+            <a class="button-1" href="music.html" rel="history">MUSIC</a>
+        </div>
+
+    <!-- TUS IMÁGENES (funcionan igual que antes) -->
+
+    <div class="titulo-estilo" style="transform: scale(80%);">
+    COPIA
+</div>
+
+
+
+
+    <img id="copia-musica" src="https://res.cloudinary.com/djddsm416/image/upload/v1754605395/COPIA-perfil_LOW_odpsxz.jpg" alt="Imagen 1" class="draggable" style="max-width: 12%; top: 60%; left: 05%; z-index: 900;">
+    <audio id="sound2" src="sounds/your-new-sound.mp3"></audio>
+
+    <img id="cabra-sonido" src="images/IMG/cabrita.png" alt="Imagen 1" class="draggable" style="max-width: 12%; top: 100px; left: 10rem; z-index: 900;">
+    <img src="images/IMG/00011-745063621.jpg" alt="Imagen 1" class="draggable" style="max-width: 20%; top: 50%; left: 70%; z-index: 900;">
+
+    <img src="images/IMG/posttraumatic-tapa.png" alt="Imagen 1" class="draggable" style="max-width: 15%; top: 70%; left: 80%; z-index: 991; rotate: 19deg;">
+
+    <video 
+        src="https://res.cloudinary.com/djddsm416/video/upload/v1754604141/MAT_TramaTeaser-8_ljcy2s.mp4" 
+        class="draggable" 
+        autoplay 
+        muted 
+        loop
+        playsinline
+        style="width: 300px; top: 150px; left: 550px;">
+    </video>
+
+     <video
+        src="https://res.cloudinary.com/djddsm416/video/upload/v1754604138/BI_teaser1-v4_qyehrf.mp4" 
+        class="draggable" 
+        autoplay 
+        muted 
+        loop
+        playsinline
+style="width: 300px; top: 27px; left: 1040px;">    </video>
+    
+     <video
+        src="images/VIDEOS/COPIA_mago-1.mp4" 
+        class="draggable" 
+        autoplay 
+        muted 
+        loop
+        playsinline
+style="width: 300px; top: 300px; left: 800px;">    </video>
+
+<video
+        src="images/VIDEOS/KO_After-4-HQ.mp4" 
+        class="draggable" 
+        autoplay 
+        muted 
+        loop
+        playsinline
+style="width: 600px; top: 300px; left: 300px;">    </video>
+
+<script>
+    // --- Configuración inicial ---
+    let highestZIndex = 1000;
+    let activeElement = null;
+    let initialX, initialY;
+
+    // Audio setup
+    const cabraSound = new Audio('sounds/goat.mp3');
+    const copiaSound = new Audio('sounds/techno.mp3');
+    cabraSound.loop = true;
+    copiaSound.loop = true;
+
+    // --- Lógica de arrastre ---
+    document.querySelectorAll('.draggable').forEach(element => {
+        element.addEventListener('mousedown', dragStart);
+        if (element.tagName.toLowerCase() === 'img') {
+            element.setAttribute('draggable', 'false');
+        }
+    });
+
+    function dragStart(e) {
+        e.preventDefault();
+        activeElement = this;
+        activeElement.classList.add('dragging');
+        
+        highestZIndex++;
+        activeElement.style.zIndex = highestZIndex;
+
+        initialX = e.clientX - activeElement.offsetLeft;
+        initialY = e.clientY - activeElement.offsetTop;
+
+        // ¡AQUÍ AÑADIMOS EL LISTENER PARA EL MOVIMIENTO!
+        document.addEventListener('mousemove', drag); // <-- AÑADIDO
+
+        // Si el elemento que agarramos es la cabra, detenemos su lógica de escape
+        if (activeElement.id === 'cabra-sonido') {
+            stopEscapeLogic();
+            cabraSound.play();
+        } else if (activeElement.id === 'copia-musica') {
+            copiaSound.play();
+        }
+    }
+
+    function drag(e) {
+        if (!activeElement) return;
+        e.preventDefault();
+        let currentX = e.clientX - initialX;
+        let currentY = e.clientY - initialY;
+        activeElement.style.left = currentX + 'px';
+        activeElement.style.top = currentY + 'px';
+    }
+
+    document.addEventListener('mouseup', dragEnd);
+
+    function dragEnd(e) {
+        // Detener sonidos
+        cabraSound.pause();
+        cabraSound.currentTime = 0;
+        copiaSound.pause();
+        copiaSound.currentTime = 0;
+
+        // ¡AQUÍ QUITAMOS EL LISTENER PARA DEJAR DE MOVER!
+        document.removeEventListener('mousemove', drag); // <-- AÑADIDO
+
+        if (!activeElement) return;
+
+        // Si soltamos la cabra, reiniciamos su lógica de escape
+        if (activeElement.id === 'cabra-sonido') {
+            startEscapeLogic();
+        }
+        
+        activeElement.classList.remove('dragging');
+        activeElement = null;
+    }
+</script>
+    
+    <!-- ======================================================= -->
+    <!-- NUEVO SCRIPT: LÓGICA DE ESCAPE DE LA CABRA -->
+    <!-- ======================================================= -->
+    <script>
+        const cabra = document.getElementById('cabra-sonido');
+        let escapeInterval = null; // Variable para controlar el intervalo de movimiento
+
+        // --- PARÁMETROS PARA MODIFICAR EL COMPORTAMIENTO ---
+
+        // Distancia en píxeles. Si el cursor está más cerca que esto, la cabra se asusta.
+        // Un valor más pequeño hace que tengas que acercarte más para que huya.
+        const escapeDistance = 200; 
+
+        // Velocidad de escape. Un número más alto hace que se mueva más rápido.
+        // Representa cuántos píxeles se mueve en cada "salto".
+        const escapeSpeed = 15;
+
+        // Inercia o "fricción". Un valor entre 0 y 1.
+        // Un valor cercano a 1 (ej. 0.95) la hará deslizarse mucho.
+        // Un valor cercano a 0 (ej. 0.7) la hará parar en seco.
+        const friction = 0.5;
+
+        // Variables para la física del movimiento
+        let vx = 0; // Velocidad horizontal
+        let vy = 0; // Velocidad vertical
+
+        function handleMouseMove(e) {
+            if (!cabra) return;
+
+            // Coordenadas del centro de la cabra
+            const cabraRect = cabra.getBoundingClientRect();
+            const cabraX = cabraRect.left + cabraRect.width / 2;
+            const cabraY = cabraRect.top + cabraRect.height / 2;
+
+            // Coordenadas del cursor
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            // Calcular la distancia entre el cursor y la cabra
+            const dx = cabraX - mouseX;
+            const dy = cabraY - mouseY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // Si el cursor está lo suficientemente cerca...
+            if (distance < escapeDistance) {
+                // Calcular el ángulo de escape (dirección opuesta al cursor)
+                const angle = Math.atan2(dy, dx);
+                
+                // Aplicar una "fuerza" de escape a la velocidad
+                vx += Math.cos(angle) * escapeSpeed;
+                vy += Math.sin(angle) * escapeSpeed;
+            }
+        }
+        
+        // Función que actualiza la posición de la cabra continuamente
+        function updatePosition() {
+            if (!cabra) return;
+
+            // Aplicar fricción para que la cabra se detenga eventualmente
+            vx *= friction;
+            vy *= friction;
+
+            // Obtenemos la posición actual
+            let currentLeft = cabra.offsetLeft;
+            let currentTop = cabra.offsetTop;
+
+            // Calculamos la nueva posición
+            let newLeft = currentLeft + vx;
+            let newTop = currentTop + vy;
+            
+            // --- LÍMITES DE LA PANTALLA ---
+            // Para que no se escape fuera de la vista
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const cabraWidth = cabra.offsetWidth;
+            const cabraHeight = cabra.offsetHeight;
+
+            if (newLeft < 0) { newLeft = 0; vx *= -1; } // Rebota en el borde izquierdo
+            if (newTop < 0) { newTop = 0; vy *= -1; } // Rebota en el borde superior
+            if (newLeft > screenWidth - cabraWidth) { newLeft = screenWidth - cabraWidth; vx *= -1; } // Rebota en el derecho
+            if (newTop > screenHeight - cabraHeight) { newTop = screenHeight - cabraHeight; vy *= -1; } // Rebota en el inferior
+
+            // Aplicamos la nueva posición
+            cabra.style.left = newLeft + 'px';
+            cabra.style.top = newTop + 'px';
+        }
+
+        // Funciones para iniciar y detener la lógica de escape
+        function startEscapeLogic() {
+            // Solo si no está ya funcionando
+            if (!escapeInterval) {
+                document.addEventListener('mousemove', handleMouseMove);
+                // Actualizamos la posición 60 veces por segundo (animación fluida)
+                escapeInterval = setInterval(updatePosition, 1000 / 60);
+            }
+        }
+
+        function stopEscapeLogic() {
+            document.removeEventListener('mousemove', handleMouseMove);
+            clearInterval(escapeInterval);
+            escapeInterval = null; // Reseteamos la variable
+        }
+
+        // Inicia la lógica cuando la página carga
+        startEscapeLogic();
+    </script>
+
+    
+</body>
+</html>

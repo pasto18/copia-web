@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Press+Start+2P&family=Quicksand:wght@300..700&family=VT323&display=swap" rel="stylesheet">
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+     body {
+            background: linear-gradient(45deg, #ffbf00, #FFFF00);
+            min-height: 150vh;
+            margin: 0;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+            opacity: 30%;
+            z-index: -1;
+        }
+
+    .video-container {
+        position: absolute;
+        max-width: 100vw;
+        will-change: transform;
+        transform-style: preserve-3d;
+    }
+
+    .fixed-element {
+        position: fixed !important;
+        transform: none !important;
+    }
+</style>
+</head>
+<body>
+   <video class="background-video fixed-element" autoplay loop muted playsinline>
+    <source src="https://res.cloudinary.com/djddsm416/video/upload/v1754604890/TV_STATIC_4K_60FPS_bjfnpa.mp4" type="video/mp4">
+</video>
+    
+
+<div class="menu-hor-estilo">
+       <a class="button-1" href="index.html" rel="history">HOME</a>     
+       <a class="button-1" href="video.html" rel="history">VIDEO</a>
+       		<a class="button-1" href="img.html" rel="history">IMG</a>
+            <span class="button-1">MUSIC</span>
+            
+    
+        </div>
+
+<div class="titulo-estilo fixed-element">
+    MUSIC
+</div>
+
+<div class="habilidades-estilo fixed-element">
+    <span class="button-2 heartbeat-1">REC</span>
+    <span class="button-2 heartbeat-2">MIX</span>
+    <span class="button-2 heartbeat-3">PRODUCTION</span>
+    <span class="button-2 heartbeat-3">ALSO LIKE TO DANCE</span>
+</div>
+        </div>
+
+
+
+
+
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-1.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+
+<!-- Haz lo mismo para los otros 9 contenedores... elimina 'top: 50rem; left: 30rem;' -->
+<!-- y añade draggable="false" a la etiqueta <img> -->
+
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-2.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-3.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-4.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-5.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-4.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-5.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-6.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-7.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-8.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-9.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-10.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+
+<div class="video-container draggable" style="width: 300px;">
+    <img 
+        src="images/music/copia-music-11.jpg" 
+        alt="COPIA_test#2"
+        style="width: 100%; height: auto;" draggable="false">
+    <div class="caption">COPIA_test#2</div>
+    <div class="caption-secondary">REC/EDIT</div>
+</div>
+
+<!-- ... etc. ... -->
+
+<!-- ... (resto del HTML igual) ... -->
+
+<!-- ____________________________________________________________________ -->
+<!-- AHORA EL SCRIPT CORREGIDO (reemplaza tu script entero por este) -->
+<!-- ____________________________________________________________________ -->
+<script>
+    // --- VARIABLES GLOBALES ---
+    let highestZIndex = 100;
+    let isDragging = false;
+    let activeContainer = null;
+    let initialX, initialY, startTime;
+
+    const containers = document.querySelectorAll('.video-container.draggable');
+
+    // --- FUNCIÓN PARA DISTRIBUIR ELEMENTOS (LA QUE FALTABA) ---
+    // Reemplaza de nuevo la función distributeElements() por esta versión mejorada.
+
+function distributeElements() {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const numColumns = 5;
+    const columnWidth = screenWidth / numColumns;
+
+    // --- AJUSTE 1: Definir el margen superior como un porcentaje ---
+    // Este es el valor que podrás modificar fácilmente. 0.20 es 20%.
+    const topMarginPercentage = 0.20; 
+    const topMarginPixels = screenHeight * topMarginPercentage;
+
+    // El área vertical disponible para distribuir ahora empieza después del margen.
+    const availableHeight = screenHeight - topMarginPixels;
+
+    const horizontalPadding = 30;
+
+    containers.forEach((container, index) => {
+        // 1. CALCULAR COLUMNA Y FILA (sin cambios)
+        const col = index % numColumns;
+        const row = Math.floor(index / numColumns);
+
+        // 2. CALCULAR POSICIÓN HORIZONTAL (X) con variación aleatoria
+        const elementWidth = container.offsetWidth;
+        // El espacio disponible para moverse horizontalmente dentro de la columna.
+        const horizontalRange = columnWidth - elementWidth - (horizontalPadding * 2);
+        
+        // --- AJUSTE 2: Movimiento horizontal aleatorio dentro de la columna ---
+        // Generamos un desplazamiento aleatorio dentro de ese rango.
+        // Aseguramos que sea positivo.
+        const randomHorizontalOffset = Math.max(0, Math.random() * horizontalRange);
+        
+        const finalX = (col * columnWidth) + horizontalPadding + randomHorizontalOffset;
+
+        // 3. CALCULAR POSICIÓN VERTICAL (Y) con margen superior
+        const rowHeight = 400; // Altura estimada por fila (ajústala si es necesario)
+        
+        // La posición base ahora empieza DESPUÉS del margen superior.
+        const baseY = topMarginPixels + (row * rowHeight);
+        
+        // Variación vertical aleatoria para que no queden en línea recta.
+        const randomVerticalOffset = (Math.random() - 0.5) * 150; // Variación de +/- 75px
+        const finalY = baseY + randomVerticalOffset;
+
+        // 4. APLICAR POSICIONES (sin cambios)
+        container.style.left = `${finalX}px`;
+        container.style.top = `${finalY}px`;
+        container.style.zIndex = index + 1;
+    });
+
+    highestZIndex = containers.length + 1;
+}
+    // --- FUNCIÓN DE PARALLAX (Tu código original, funciona bien) ---
+    function parallax() {
+        if (isDragging) return; // No aplicamos parallax mientras se arrastra
+
+        const scrolled = window.pageYOffset;
+        containers.forEach(container => {
+            const speed = container.dataset.speed || 0.1; // Damos un valor por defecto
+            const yPos = -(scrolled * speed);
+            
+            const currentTransform = container.style.transform || '';
+            const scaleMatch = currentTransform.match(/scale\((.*?)\)/);
+            const scale = scaleMatch ? scaleMatch[0] : '';
+            
+            container.style.transform = `translateY(${yPos}px) ${scale}`.trim();
+        });
+    }
+
+    // --- LÓGICA DE ARRASTRE ---
+    containers.forEach((container, index) => {
+        // Asignamos una velocidad de parallax diferente para cada uno
+        container.dataset.speed = 0.3 + (index * 0.05);
+
+        container.addEventListener('mousedown', (e) => {
+            // Prevenimos el arrastre nativo de la imagen
+            e.preventDefault();
+
+            isDragging = true;
+            activeContainer = container;
+            startTime = new Date().getTime();
+            
+            // Traer al frente
+            highestZIndex++;
+            container.style.zIndex = highestZIndex;
+            
+            // Guardamos la posición inicial relativa al contenedor
+            initialX = e.clientX - container.offsetLeft;
+            initialY = e.clientY - container.offsetTop;
+            
+            container.style.cursor = 'grabbing';
+            container.classList.add('dragging'); // Añadimos clase para efectos CSS
+        });
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging || !activeContainer) return;
+        
+        e.preventDefault();
+        const currentX = e.clientX - initialX;
+        const currentY = e.clientY - initialY;
+        
+        // Al mover, anulamos el transform de parallax para que no interfiera
+        activeContainer.style.transform = activeContainer.style.transform.replace(/translateY\([^)]+\)/, '');
+
+        activeContainer.style.left = `${currentX}px`;
+        activeContainer.style.top = `${currentY}px`;
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (!activeContainer) return;
+        
+        const endTime = new Date().getTime();
+        const timeDiff = endTime - startTime;
+        
+        // Lógica de click para escalar (tu código original)
+        if (timeDiff < 200) {
+            const currentScale = activeContainer.style.transform.includes('scale(1.2)') ? 'scale(1)' : 'scale(1.2)';
+            activeContainer.style.transform = currentScale;
+        }
+        
+        isDragging = false;
+        activeContainer.style.cursor = 'grab';
+        activeContainer.classList.remove('dragging');
+        activeContainer = null;
+
+        // Al soltar, volvemos a aplicar el parallax
+        requestAnimationFrame(parallax);
+    });
+
+    // --- EVENT LISTENERS GLOBALES ---
+    window.addEventListener('scroll', () => {
+        requestAnimationFrame(parallax);
+    });
+
+    // CORREGIDO: Llamamos a nuestra nueva función cuando la ventana carga
+    window.addEventListener('load', () => {
+        distributeElements();
+        requestAnimationFrame(parallax); // Aplicar parallax inicial
+    });
+
+</script>
