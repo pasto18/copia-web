@@ -54,7 +54,7 @@
     display: flex;
     margin-left: 59px;
     flex-wrap: wrap;
-    top:31%;
+    top:35%;
     justify-content: left; /* Centra los spans horizontalmente */
     gap: .5rem;
     scale:180%;             /* Espacio uniforme entre todos los spans/botones */
@@ -145,13 +145,59 @@
     scale: 1.15;
 }
 
+
+.info-1 {
+	font-size: .8rem;
+	font-family: "Quicksand", sans-serif;
+  	font-optical-sizing: auto;
+  	font-weight: 700;
+	line-height: 1.1;
+	letter-spacing: 0em;
+	font-variation-settings: 'slnt' 0, 'MONO' 0;
+	color: #ffc800;
+	display: inline-block;
+	border-color:#ffc800;
+	border-style: solid;
+	border-radius: 999rem;
+	padding-top: 0.2rem;
+	padding-right: .3rem;
+	padding-bottom: 0.2rem;
+	padding-left: .3rem;
+	border-width: 1px;
+	transition: scale 0.1s ease-in-out; /* Mueve la transición aquí */
+	will-change: filter;
+	filter: drop-shadow(3px 3px 0rem #ff0000);
+	background: #ff0000;
+	text-decoration: none;
+
+      user-select: none;
+    cursor: default;
+
+}
+
+.info-1 a {
+	color: #ff0000;
+	text-decoration: none;
+}
+
+.info-1 a.active {
+	color: #ff0000;
+	text-decoration: none;
+}
+
+.info-1:hover {
+    scale: 1.15;
+}
+
+
+
 .titulo-estilo {
     /* --- Posicionamiento y comportamiento Sticky --- */
     position: fixed;
     margin-left: 1.5rem;
     margin-top: -3rem;
     top: 0; 
-    z-index: 800;
+    z-index: 900;
     
     /* --- Escala y Transformaciones --- */
     transform: translateX(2%); /* Ajusta el valor negativo de translateY */    transform-origin: top left;
@@ -197,11 +243,12 @@
 
 .menu-hor-estilo {
     position: fixed;
-    top: 2%;
+    top: 3%;
     z-index: 900;
+    scale: 150%;
     
     /* --- FORZAMOS EL ANCHO Y POSICIÓN RELATIVOS A LA VENTANA --- */
-    width: 97%; /* 100vw = 100% del ANCHO DEL VIEWPORT (ventana) */
+    width: 100vw; /* 100vw = 100% del ANCHO DEL VIEWPORT (ventana) */
     left: 0;      /* Anclamos el inicio del div al borde izquierdo de la ventana */
     
     /* --- AHORA, USAMOS FLEXBOX PARA ALINEAR LOS BOTONES DENTRO DE NUESTRO CONTENEDOR --- */
@@ -209,9 +256,9 @@
     justify-content: flex-end; /* Empuja los botones al final (derecha) */
 
     /* --- ESTILOS ADICIONALES PARA MEJOR APARIENCIA --- */
-    padding-right: 6rem;   /* Añade un espacio para que los botones no se peguen al borde */
+    padding-right: 18.5%;   /* Añade un espacio para que los botones no se peguen al borde */
     box-sizing: border-box;/* Importante para que el padding no cause desbordamiento */
-    gap: 1rem; /* Un poco de espacio entre los botones */
+    gap: .5rem; /* Un poco de espacio entre los botones */
 }
 
 

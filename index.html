@@ -58,6 +58,7 @@
             <a class="button-1" href="video.html" rel="history">VIDEO</a>
             <a class="button-1" href="img.html" rel="history">IMG</a>
             <a class="button-1" href="music.html" rel="history">MUSIC</a>
+            <a class="button-1" href="others.html" rel="history">OTHERS</a>
         </div>
 
     <!-- TUS IMÁGENES (funcionan igual que antes) -->
@@ -69,11 +70,12 @@
 
 
 
+
     <img id="copia-musica" src="https://res.cloudinary.com/djddsm416/image/upload/v1754605395/COPIA-perfil_LOW_odpsxz.jpg" alt="Imagen 1" class="draggable" style="max-width: 12%; top: 60%; left: 05%; z-index: 900;">
 
-    <img id="cabra-sonido" src="https://res.cloudinary.com/djddsm416/image/upload/v1754825098/cabrita_hmoo6j.png" alt="Imagen 1" class="draggable" style="max-width: 12%; top: 100px; left: 10rem; z-index: 900;">
+    <img id="cabra-sonido" src="https://res.cloudinary.com/djddsm416/image/upload/v1754825098/cabrita_hmoo6j.png" alt="Imagen 1" class="draggable" style="max-width: 12%; top: 100px; left: 10rem; z-index: 999;">
 
-    <img src="https://res.cloudinary.com/djddsm416/image/upload/v1754825152/posttraumatic-tapa_lgeiqv.png" alt="Imagen 1" class="draggable" style="max-width: 14%; top: 65%; left: 80%; z-index: 900; rotate: 20deg;">
+    <img src="https://res.cloudinary.com/djddsm416/image/upload/v1754825152/posttraumatic-tapa_lgeiqv.png" alt="Imagen 1" class="draggable" style="max-width: 14%; top: 65%; left: 80%; z-index: 800; rotate: 20deg;">
 
 
     <video 
@@ -115,7 +117,7 @@ style="width: 56%; top: 25%; left: 10%; z-index: 1;">    </video>
 
 <script>
     // --- Configuración inicial ---
-    let highestZIndex = 2000;
+    let highestZIndex = 100;
     let activeElement = null;
     let initialX, initialY;
 
@@ -295,6 +297,20 @@ style="width: 56%; top: 25%; left: 10%; z-index: 1;">    </video>
         // Inicia la lógica cuando la página carga
         startEscapeLogic();
     </script>
+
+ <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const titleElement = document.getElementById('myTitle'); // O document.querySelector('.titulo-estilo');
+
+        if (titleElement) {
+            // Un pequeño retraso para asegurar que el navegador ha renderizado el estado inicial
+            // antes de aplicar el estado final. A veces 50ms son suficientes.
+            setTimeout(() => {
+                titleElement.classList.add('is-visible');
+            }, 100); // 100ms de retraso para que la animación se vea bien
+        }
+    });
+</script>
 
     
 </body>

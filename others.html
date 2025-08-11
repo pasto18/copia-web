@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Press+Start+2P&family=Quicksand:wght@300..700&family=VT323&display=swap" rel="stylesheet">
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+     body {
+            background: linear-gradient(45deg, #ff7300, #08c4ca);
+            min-height: 150vh;
+            margin: 0;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+            opacity: 30%;
+            z-index: -1;
+        }
+
+
+        .fixed-element {
+            position: fixed !important;
+            transform: none !important;
+        }
+
+    /* Contenedor de la imagen y el texto */
+        .image-wrapper {
+            position: absolute; /* Para posicionar libremente en la página */
+            height: auto; /* La altura se ajustará automáticamente */
+            overflow: hidden; /* Asegura que cualquier desbordamiento esté contenido */
+            transition: transform 0.3s ease; /* Transición suave al pasar el ratón */
+            cursor: pointer; /* Indica que es clickeable */
+            border-radius: 8px; /* Bordes redondeados */
+        }
+
+        .image-wrapper img {
+            display: block;
+            width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+            height: auto; /* Mantiene la proporción */
+            transition: transform 0.3s ease; /* Transición para el zoom en hover */
+        }
+
+        /* Estilos para el texto */
+        .image-text {
+            font-size: clamp(.1rem, 1.5vw, 2rem);
+            font-family: "Quicksand", sans-serif;
+          	font-optical-sizing: auto;
+            font-weight: 700;
+            line-height: 100%;
+            position: absolute;
+            bottom: 0; /* Posicionar en la parte inferior de la imagen */
+            left: 0;
+            width: 100%;
+            color: rgb(0, 0, 0);
+            padding: 0px;
+            box-sizing: border-box;
+            text-align: center;
+            opacity: 0; /* Inicialmente oculto */
+            transition: opacity 0.3s ease, transform 0.3s ease; /* Transición suave para aparecer */
+            	color: #fff700;
+            display: inline-block;
+	        border-color:#fff700;
+        	border-style: solid;
+	        border-radius: 999rem;
+            padding-top: 0.4rem;
+            padding-right: 1.2rem;
+            padding-bottom: 0.4rem;
+            padding-left: 1.2rem;
+            border-width: 0.2rem;
+            filter: drop-shadow(0.4rem 0.4rem 0rem #fff700);
+            transition: scale 0.1s ease-in-out; /* Mueve la transición aquí */
+            will-change: filter;
+            background: #ff0000;
+
+        }
+
+        /* Efecto al pasar el ratón (hover) */
+        .image-wrapper:hover .image-text {
+            opacity: 1; /* Muestra el texto */
+            transform: translateY(-100%) ; /* Desplázalo a su posición normal */
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.05); /* Ligeramente más grande al pasar el ratón */
+        }
+</style>
+</head>
+<body>
+   <video class="background-video fixed-element" autoplay loop muted playsinline>
+    <source src="https://res.cloudinary.com/djddsm416/video/upload/v1754604890/TV_STATIC_4K_60FPS_bjfnpa.mp4" type="video/mp4">
+</video>
+    
+
+<div class="menu-hor-estilo">
+       <a class="button-1" href="index.html" rel="history">HOME</a>     
+       <a class="button-1" href="video.html" rel="history">VIDEO</a>
+        <a class="button-1" href="img.html" rel="history">IMG</a>
+        <a class="button-1" href="music.html" rel="history">MUSIC</a>
+        <a class="button-1" href="others.html" rel="history">OTHERS</a>
+
+            
+    
+        </div>
+
+
+<div class="titulo-estilo fixed-element">
+    OTHERS
+</div>
+
+
+
+<div class="habilidades-estilo fixed-element">
+    <span class="button-2 heartbeat-1">RANDOM</span>
+    <span class="button-2 heartbeat-2">SHIT</span>
+    <span class="button-2 heartbeat-2">LOST & FOUND</span>
+    <span class="button-2 heartbeat-2">I LIKE THESE BUTTONS</span>
+</div>
+        
+
+
+
+
+
+    <!-- VIDEOS! -->
+
+
+
+
+<div class="image-wrapper" id="posttraumatic-tapa" data-link="https://theposttraumatic.com"  style="top: 30%; left: 3%; z-index: 800; rotate: 10deg; width: 30%;">
+        <img src="https://res.cloudinary.com/djddsm416/image/upload/v1754825152/posttraumatic-tapa_lgeiqv.png" alt="The Posttraumatic" >
+        <div class="image-text">
+            <a>THE POSTTRAUMATIC
+            <br>Tu periódico de desconfianza</a>
+        </div>
+    </div>
+
+            <img src="https://res.cloudinary.com/djddsm416/image/upload/v1754953452/tp-2_yewt3k.webp" alt="The Posttraumatic" style="position: absolute; top: 40%; left: 20%; rotate: -5deg; width: 45%; z-index: 2;">
+            <img src="https://res.cloudinary.com/djddsm416/image/upload/v1754953452/tp-1_maeh2o.webp" alt="The Posttraumatic" style="position: absolute; top: 40%; left: 50%; rotate: 5deg; width: 45%; z-index: 1;">
+
+<div class="info-1" style="position: absolute; top: 85%; left: 10%; scale: 200%; z-index: 900;">
+    THE POSTTRAUMATIC
+</div>
+
+
+
+
+
+
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Selecciona todos los contenedores de imagen que tienen un atributo data-link
+            const imageWrappers = document.querySelectorAll('.image-wrapper[data-link]');
+
+            imageWrappers.forEach(wrapper => {
+                wrapper.addEventListener('click', () => {
+                    const link = wrapper.dataset.link; // Obtiene el valor del atributo data-link
+                    if (link) {
+                       window.open(link, '_blank');
+                    }
+                });
+            });
+        });
+    </script>
+
+
+  
+
+
+
+
+
+</body>
+</html>
