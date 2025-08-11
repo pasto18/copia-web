@@ -63,7 +63,7 @@
 }
 
 .button-1 {
-	font-size: 100%;
+    font-size: clamp(.1rem, 1vw, 1rem);
 	font-family: "Quicksand", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 700;
@@ -155,20 +155,19 @@
     
     /* --- Escala y Transformaciones --- */
     transform: translateX(2%); /* Ajusta el valor negativo de translateY */    transform-origin: top left;
- 
+    font-size: clamp(3rem, 12vw, 11rem);
+
     /* --- Estilos de Fuente y Texto (serán heredados por los hijos) --- */
     font-family: "VHS", system-ui;
   	font-weight: 100;
   	font-style: normal;
-  	font-size: 12rem;         /* Tamaño de la fuente base para el contenido dentro de este div *//* Grosor de la fuente (700 es 'bold') */
     color: #e6ff00;             /* Color del texto (un gris claro, por ejemplo) */
     text-transform: uppercase;  /* Transforma todo el texto a mayúsculas */
     letter-spacing: -8px;        /* Añade un poco de espacio entre las letras */
-   	text-shadow: rgba(255, 0, 0, 0.91) 13px 15px;
+   	text-shadow: rgba(255, 0, 0, 0.91) .6rem .9rem;
     
     
     /* --- Dimensiones y Espaciado --- */
-    max-width: 100%;
     padding: 0rem;
     height: 0;
 	font-style: normal;
@@ -212,7 +211,6 @@
     /* --- ESTILOS ADICIONALES PARA MEJOR APARIENCIA --- */
     padding-right: 6rem;   /* Añade un espacio para que los botones no se peguen al borde */
     box-sizing: border-box;/* Importante para que el padding no cause desbordamiento */
-    scale: 1.2; /* Mantenemos tu escala */
     gap: 1rem; /* Un poco de espacio entre los botones */
 }
 
@@ -239,7 +237,7 @@
 
 .caption-title {
 	--text-style: "CAPTION TITLE";
-	font-size: 1.50rem;
+	font-size: 2.50rem;
 	font-weight: 500;
 	color: #000000;
     background: #00fff9;
@@ -292,10 +290,8 @@ font-family: "Bricolage Grotesque", sans-serif;
   font-style: normal;
   font-variation-settings:"wdth" 100;
 	padding: -5px 2px;  /* Reducido el padding vertical a -5px */
-    line-height: .5;     /* Añadido line-height para comprimir verticalmente */
     border-radius: 0px;
-    font-size: 15px;
-    mix-blend-mode: difference;
+    font-size: 20px;
 }
 
 @keyframes heartbeat {

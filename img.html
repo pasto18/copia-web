@@ -69,6 +69,7 @@
 <div class="habilidades-estilo fixed-element">
     <span class="button-2 heartbeat-1">PHOTO</span>
     <span class="button-2 heartbeat-2">AI</span>
+    <span class="button-2 heartbeat-3">3D</span>
 </div>
         </div>
 
@@ -89,110 +90,140 @@
 
 
 
-  <script>
-const images = [
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754817891/IA_19_ouyuo3.jpg", width: "449px", alt: "00019-2619834456" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818271/IA__10_o8t7wn.jpg", width: "494px", alt: "00071-3886924525" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818272/IA__12_mrn8ff.jpg", width: "447px", alt: "00073-1135385919" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818273/IA__13_yll7hq.jpg", width: "420px", alt: "AnimalesCiudad_b&n_11" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818274/IA__14_luwtrp.jpg", width: "467px", alt: "AnimalesCiudad_b&n_12" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818274/IA__16_qzit8n.jpg", width: "306px", alt: "AnimalesCiudad_b&n_13" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754817891/IA__17_he59wq.jpg", width: "449px", alt: "00019-2619834456" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818271/IA__18_snluak.jpg", width: "494px", alt: "00071-3886924525" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818272/IA__19_ru0tao.jpg", width: "447px", alt: "00073-1135385919" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818273/IA__19_ru0tao.jpg", width: "420px", alt: "AnimalesCiudad_b&n_11" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818274/IA__20_jttuy3.jpg", width: "467px", alt: "AnimalesCiudad_b&n_12" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754817891/IA__21_fgtwgc.jpg", width: "449px", alt: "00019-2619834456" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818271/IA__22_hguxnl.jpg", width: "494px", alt: "00071-3886924525" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818272/IA__3_im4p9f.jpg", width: "447px", alt: "00073-1135385919" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818273/IA__4_i0tsii.jpg", width: "420px", alt: "AnimalesCiudad_b&n_11" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818274/IA__5_zcijgl.jpg", width: "467px", alt: "AnimalesCiudad_b&n_12" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818274/IA__6_i9dxtq.jpg", width: "306px", alt: "AnimalesCiudad_b&n_13" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818274/IA__7_nkkcrj.jpg", width: "306px", alt: "AnimalesCiudad_b&n_13" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818274/IA__8_jnlc7k.jpg", width: "306px", alt: "AnimalesCiudad_b&n_13" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818274/IA__9_i90vfi.jpg", width: "306px", alt: "AnimalesCiudad_b&n_13" },
-    { src: "https://res.cloudinary.com/djddsm416/image/upload/v1754818274/IA__1_j1a8tp.jpg", width: "306px", alt: "AnimalesCiudad_b&n_13" },
-    // Agrega más imágenes aquí
-];
+<script>
+// --- Configuración ---
+const CLOUD_NAME = "djddsm416"; // ¡Tu nombre de nube de Cloudinary!
+const TAG_NAME = "img"; // La etiqueta que usaste en Cloudinary
 
-let highestZIndex = 100;
-let isDragging = false;
-let activeContainer = null;
-let initialX, initialY;
-let startTime;
+// --- Lógica de la Galería ---
+// --- Lógica de la Galería ---
+async function fetchAndCreateImages() {
+    const apiUrl = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/${TAG_NAME}.json`;
 
-function createImages() {
-    const container = document.querySelector('body');
-    
-    images.forEach(img => {
-        const div = document.createElement('div');
-        div.className = 'video-container draggable';
-        div.style.width = img.width;
-        div.style.cursor = 'grab';
-        
-        const imgElement = document.createElement('img');
-        imgElement.src = img.src;
-        imgElement.alt = img.alt;
-        imgElement.style.width = '100%';
-        imgElement.style.height = 'auto';
-        
-        div.appendChild(imgElement);
-        container.appendChild(div);
-        
-        // Add drag functionality to each container
-        div.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startTime = new Date().getTime();
-            activeContainer = div;
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+        const data = await response.json();
+
+        if (!data.resources || data.resources.length === 0) {
+            console.warn(`No se encontraron imágenes con la etiqueta: ${TAG_NAME}`);
+            return;
+        }
+
+        const container = document.querySelector('body');
+        data.resources.forEach(img => {
+            const div = document.createElement('div');
+            div.className = 'video-container draggable';
+
+            // --- LÓGICA DE TAMAÑO COMBINADA (RESPONSIVE + LÍMITES) ---
+
+            // 1. LÍMITES MÁXIMOS: La caja de contención invisible.
+            const MAX_ALLOWED_WIDTH = 600;
+            const MAX_ALLOWED_HEIGHT = 800;
+
+            // 2. TAMAÑO INICIAL RESPONSIVE: Para que se distribuyan bien.
+            const PERCENT_OF_SCREEN = 0.45; // 45% del ancho de la pantalla
+            const initialWidth = window.innerWidth * PERCENT_OF_SCREEN;
             
-            highestZIndex++;
-            div.style.zIndex = highestZIndex;
+            // 3. APLICAMOS TODO AL 'div'
+            // Le damos un tamaño inicial para que la función 'distributeImages' sepa cómo colocarlos.
+            div.style.width = `${initialWidth}px`; 
             
-            initialX = e.clientX - div.offsetLeft;
-            initialY = e.clientY - div.offsetTop;
+            // Y le ponemos los topes para que no crezcan indefinidamente.
+            div.style.maxWidth = `${MAX_ALLOWED_WIDTH}px`;
+            div.style.maxHeight = `${MAX_ALLOWED_HEIGHT}px`;
             
-            div.style.cursor = 'grabbing';
-            e.preventDefault();
+            // --- FIN DE LA LÓGICA DE TAMAÑO ---
+
+            div.style.cursor = 'grab';
+
+            const imgElement = document.createElement('img');
+            imgElement.src = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/v${img.version}/${img.public_id}.${img.format}`;
+            imgElement.alt = img.public_id;
+
+            // ESTO SE MANTIENE IGUAL Y ES LA CLAVE PARA NO DEFORMAR
+            imgElement.style.width = '100%'; 
+            imgElement.style.height = 'auto'; 
+            imgElement.setAttribute('draggable', 'false');
+
+            div.appendChild(imgElement);
+            container.appendChild(div);
+
+            div.addEventListener('mousedown', handleDragStart);
         });
-    });
+        
+        // ¡IMPORTANTE! Llamamos a distributeImages DESPUÉS de que todas las imágenes se hayan creado.
+        setTimeout(distributeImages, 100);
+
+    } catch (error) {
+        console.error("No se pudieron cargar las imágenes de la galería:", error);
+    }
 }
 
-// Global mouse event handlers
-document.addEventListener('mousemove', (e) => {
-    if (!activeContainer || !isDragging) return;
-    
+// ... (El resto de tu script de arrastre y demás sigue igual) ...
+
+
+// --- Lógica de Arrastre (mejorada y centralizada) ---
+let highestZIndex = 100;
+let activeContainer = null;
+let initialX, initialY;
+let clickStartTime;
+
+function handleDragStart(e) {
     e.preventDefault();
+    clickStartTime = new Date().getTime();
+    activeContainer = this; // 'this' es el div que recibió el click
+
+    highestZIndex++;
+    activeContainer.style.zIndex = highestZIndex;
+    activeContainer.style.cursor = 'grabbing';
     
+    initialX = e.clientX - activeContainer.offsetLeft;
+    initialY = e.clientY - activeContainer.offsetTop;
+
+    // Empezamos a escuchar los movimientos y el "soltar" en todo el documento
+    document.addEventListener('mousemove', handleDragging);
+    document.addEventListener('mouseup', handleDragEnd);
+}
+
+function handleDragging(e) {
+    if (!activeContainer) return;
+    e.preventDefault();
     const currentX = e.clientX - initialX;
     const currentY = e.clientY - initialY;
-    
-    activeContainer.style.left = currentX + 'px';
-    activeContainer.style.top = currentY + 'px';
-});
+    activeContainer.style.left = `${currentX}px`;
+    activeContainer.style.top = `${currentY}px`;
+}
 
-document.addEventListener('mouseup', () => {
+function handleDragEnd(e) {
     if (!activeContainer) return;
-    
-    const endTime = new Date().getTime();
-    const timeDiff = endTime - startTime;
-    
+
+    const clickEndTime = new Date().getTime();
+    const timeDiff = clickEndTime - clickStartTime;
+
+    // Detectar si fue un click corto (para hacer zoom)
     if (timeDiff < 200) {
-        const currentScale = activeContainer.style.transform.includes('scale(1.7)') ? '1' : '1.7';
-        activeContainer.style.transform = `scale(${currentScale})`;
+        const isScaled = activeContainer.style.transform.includes('scale(1.7)');
+        activeContainer.style.transform = isScaled ? '' : 'scale(1.7)';
     }
-    
-    isDragging = false;
+
     activeContainer.style.cursor = 'grab';
+    
+    // Dejamos de escuchar eventos, ¡muy importante!
+    document.removeEventListener('mousemove', handleDragging);
+    document.removeEventListener('mouseup', handleDragEnd);
+
+    // Guardar posición
+    savePosition(activeContainer);
+    
     activeContainer = null;
-});
+}
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    createImages();
-    setTimeout(distributeImages, 100);
-});
+
+// --- Inicialización ---
+document.addEventListener('DOMContentLoaded', fetchAndCreateImages);
+
 </script>
-
 
 
 <script>

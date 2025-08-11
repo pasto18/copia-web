@@ -326,41 +326,7 @@ window.addEventListener('resize', () => {
     resizeTimeout = setTimeout(distributeImages, 100);
 });
 
-// Add this code inside your <script> tag, after the existing code
 
-const escapeRadius = 100; // Radius within which the image will escape
-const escapeSpeed = 10;    // Speed at which the image escapes
-
-document.addEventListener('mousemove', (e) => {
-    const cabrita = document.getElementById('cabrita-sonido');
-    if (!cabrita) return;
-
-    const cabritaRect = cabrita.getBoundingClientRect();
-    const cabritaCenterX = cabritaRect.left + cabritaRect.width / 2;
-    const cabritaCenterY = cabritaRect.top + cabritaRect.height / 2;
-
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
-
-    const distance = Math.sqrt(
-        Math.pow(mouseX - cabritaCenterX, 2) +
-        Math.pow(mouseY - cabritaCenterY, 2)
-    );
-
-    if (distance < escapeRadius && !isDragging) {
-        const angle = Math.atan2(mouseY - cabritaCenterY, mouseX - cabritaCenterX);
-
-        const escapeX = cabrita.offsetLeft - Math.cos(angle) * escapeSpeed;
-        const escapeY = cabrita.offsetTop - Math.sin(angle) * escapeSpeed;
-
-        // Keep within bounds
-        const maxX = window.innerWidth - cabritaRect.width;
-        const maxY = window.innerHeight - cabritaRect.height;
-
-        cabrita.style.left = Math.max(0, Math.min(escapeX, maxX)) + 'px';
-        cabrita.style.top = Math.max(0, Math.min(escapeY, maxY)) + 'px';
-    }
-});
 </script>
 
 
