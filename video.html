@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video</title>
+    <title>COPIA - VIDEO</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,6 +45,18 @@
         position: fixed !important;
         transform: none !important;
     }
+
+    #bouncingImage {
+            position: absolute;
+            width: 150px; /* Tamaño de la imagen, ajusta si es necesario */
+            height: auto;
+            user-select: none; /* Evita que se pueda seleccionar el texto/imagen */
+            pointer-events: none; /* Evita que el cursor interactúe con la imagen */
+            /* Inicialmente fuera de la pantalla para que aparezca animado o en una posición random */
+            left: 0; 
+            top: 0;
+            z-index: 800;
+        }
 </style>
 </head>
 <body>
@@ -52,10 +64,12 @@
     <source src="https://res.cloudinary.com/djddsm416/video/upload/v1754604890/TV_STATIC_4K_60FPS_bjfnpa.mp4" type="video/mp4">
 </video>
     
+ <img id="bouncingImage" src="https://res.cloudinary.com/djddsm416/image/upload/v1754955947/DVD_logo-3112355690_hcfqhs.png">
+
 
 <div class="menu-hor-estilo">
-       <a class="button-1" href="index.html" rel="history">HOME</a>     
-       <a class="button-1" href="video.html" rel="history">VIDEO</a>
+        <a class="button-1" href="index.html">HOME</a>       
+        <a class="button-1" href="video.html" rel="history">VIDEO</a>
         <a class="button-1" href="img.html" rel="history">IMG</a>
         <a class="button-1" href="music.html" rel="history">MUSIC</a>
         <a class="button-1" href="others.html" rel="history">OTHERS</a>
@@ -259,5 +273,137 @@
         });
     });
 </script>
+
+
+
+
+
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const image = document.getElementById('bouncingImage');
+            
+            // --- Configuración de la animación ---
+            const initialSpeed = 2; 
+            let x = 0; // Posición horizontal (relativa al documento)
+            let y = 0; // Posición vertical (relativa al documento)
+            let dx = initialSpeed; 
+            let dy = initialSpeed; 
+
+            // --- Obtener dimensiones de la imagen y la VENTANA VISIBLE ---
+            let imageWidth;
+            let imageHeight;
+            let viewportWidth;  // Ancho de la ventana visible
+            let viewportHeight; // Altura de la ventana visible
+
+            function updateDimensions() {
+                imageWidth = image.offsetWidth;
+                imageHeight = image.offsetHeight;
+                viewportWidth = window.innerWidth;
+                viewportHeight = window.innerHeight;
+            }
+
+            // --- Posición inicial aleatoria dentro del viewport actual ---
+            function setRandomInitialPosition() {
+                updateDimensions(); 
+                
+                // Posición inicial dentro del viewport actual
+                // Para que se posicione bien respecto al documento, sumamos el scrollY
+                x = Math.random() * (viewportWidth - imageWidth);
+                y = window.scrollY + Math.random() * (viewportHeight - imageHeight);
+                
+                const padding = 10;
+                if (x < padding) x = padding;
+                if (y < window.scrollY + padding) y = window.scrollY + padding; // Asegura que no suba del viewport
+                if (x > viewportWidth - imageWidth - padding) x = viewportWidth - imageWidth - padding;
+                if (y > window.scrollY + viewportHeight - imageHeight - padding) y = window.scrollY + viewportHeight - imageHeight - padding; // Asegura que no baje del viewport
+            }
+            
+            setRandomInitialPosition(); 
+            
+            // --- Función para cambiar el color (HUE) ---
+            function changeHue() {
+                const randomHue = Math.random() * 360;
+                image.style.filter = `hue-rotate(${randomHue}deg)`;
+            }
+
+            // --- Función de animación principal ---
+            function animate() {
+                // Mover la imagen
+                x += dx;
+                y += dy;
+
+                // Obtener el desplazamiento actual del scroll
+                const scrollY = window.scrollY;
+
+                // --- Detección de colisiones con los bordes del VIEWPORT ---
+                
+                // Colisión con el borde derecho del viewport
+                if (x + imageWidth > viewportWidth) {
+                    x = viewportWidth - imageWidth; 
+                    dx = -initialSpeed; 
+                    changeHue(); 
+                } 
+                // Colisión con el borde izquierdo del viewport
+                else if (x < 0) {
+                    x = 0; 
+                    dx = initialSpeed; 
+                    changeHue(); 
+                }
+
+                // Colisión con el borde inferior del viewport
+                // Se calcula el borde inferior del viewport en relación con el documento
+                if (y + imageHeight > scrollY + viewportHeight) {
+                    y = scrollY + viewportHeight - imageHeight; 
+                    dy = -initialSpeed; 
+                    changeHue(); 
+                } 
+                // Colisión con el borde superior del viewport
+                // Se calcula el borde superior del viewport en relación con el documento
+                else if (y < scrollY) {
+                    y = scrollY; 
+                    dy = initialSpeed; 
+                    changeHue(); 
+                }
+
+                // Aplicar las nuevas posiciones al estilo de la imagen
+                image.style.left = `${x}px`;
+                image.style.top = `${y}px`;
+
+                // Solicitar el siguiente frame de animación
+                requestAnimationFrame(animate);
+            }
+
+            // --- Manejo del redimensionamiento de la ventana ---
+            // Y del SCROLLING (para ajustar la posición del logo si es necesario)
+            let eventTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(eventTimeout);
+                eventTimeout = setTimeout(() => {
+                    updateDimensions();
+                    // Ajustar la posición si la imagen quedó fuera de los nuevos límites del viewport
+                    // Esto es importante para que no desaparezca si el viewport se encoge
+                    const currentScrollY = window.scrollY;
+                    if (x + imageWidth > viewportWidth) x = viewportWidth - imageWidth;
+                    if (y + imageHeight > currentScrollY + viewportHeight) y = currentScrollY + viewportHeight - imageHeight;
+                    if (x < 0) x = 0;
+                    if (y < currentScrollY) y = currentScrollY;
+                    image.style.left = `${x}px`;
+                    image.style.top = `${y}px`;
+                }, 250); 
+            });
+
+            // Opcional: Si quieres que el logo se reajuste inmediatamente al scrollear
+            // window.addEventListener('scroll', () => {
+            //     // Podrías ajustar la posición de Y aquí si el logo se saliera
+            //     // o resetear su posición si lo prefieres.
+            //     // Por ahora, como es 'absolute', se moverá con el scroll, lo cual es el efecto deseado.
+            // });
+
+            // Iniciar la animación
+            animate();
+        });
+    </script>
+
+
 </body>
 </html>

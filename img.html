@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMG</title>
+    <title>COPIA - IMG</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,6 +39,7 @@
         max-width: 100vw;
         will-change: transform;
         transform-style: preserve-3d;
+        box-shadow: .3rem .3rem 5px rgba(0, 0, 0, 0.5);
     }
 
     .fixed-element {
@@ -205,8 +206,8 @@ function handleDragEnd(e) {
 
     // Detectar si fue un click corto (para hacer zoom)
     if (timeDiff < 200) {
-        const isScaled = activeContainer.style.transform.includes('scale(1.7)');
-        activeContainer.style.transform = isScaled ? '' : 'scale(1.7)';
+        const isScaled = activeContainer.style.transform.includes('scale(1.5)');
+        activeContainer.style.transform = isScaled ? '' : 'scale(1.5)';
     }
 
     activeContainer.style.cursor = 'grab';
