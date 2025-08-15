@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include 'head.html'; ?>
+    <title>COPIA</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/1.11.1/model-viewer.min.js"></script>
+    
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: sans-serif;
+            padding: 20px;
+            /* Evita barras de scroll si los elementos se salen */
+            overflow: hidden; 
+        }
+
+        .no-select {
+            user-select: none;
+        }
+
+        .draggable {
+            position: absolute;
+            cursor: grab;
+            z-index: 10;
+            border: 0px solid rgba(255, 255, 255, 0.2); /* Borde sutil para ver los límites */
+            border-radius: 8px; /* Bordes redondeados */
+        }
+        
+        .dragging {
+            cursor: grabbing;
+            z-index: 20;
+            transform: scale(1.10);
+            box-shadow: 0 0px 0px rgba(0,0,0,0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-color: rgba(255, 255, 255, 0);
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: 30%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <video class="background-video" autoplay loop muted playsinline>
+        <source src="https://res.cloudinary.com/djddsm416/video/upload/v1754604890/TV_STATIC_4K_60FPS_bjfnpa.mp4" type="video/mp4">
+    </video>
+
+    <div class="menu-estilo">
+            <a class="button-1" href="video.html" rel="history">VIDEO</a>
+            <a class="button-1" href="img.html" rel="history">IMG</a>
+            <a class="button-1" href="music.html" rel="history">MUSIC</a>
+            <a class="button-1" href="others.html" rel="history">OTHERS</a>
+        </div>
+
+            <a class="info-1" href="others.html" style="position: absolute; top: 90%; z-index: 2000; left: 3%; font-size: 1.5rem; text-align: center; width: 20%;" rel="history">ABOUT & CONTACT</a>
+
+
+    <!-- TUS IMÁGENES (funcionan igual que antes) -->
+
+    <div class="titulo-estilo">
+    COPIA
+</div>
+
+
+
+
+
+    <model-viewer 
+    src="https://res.cloudinary.com/djddsm416/image/upload/v1754959807/Marta_insectotropics_lpuncn.glb"
+    alt="Un modelo 3D de ejemplo"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    shadow-intensity="1"
+    camera-controls
+    touch-action="pan-y"
+    disable-tap
+    min-field-of-view="100deg"
+    max-field-of-view="200deg"
+    style="width: 100vw; height: 100vh; margin-top: -1%; background-color: #f0f0f000;"
+    >
+</model-viewer>
+</body>
+</html>

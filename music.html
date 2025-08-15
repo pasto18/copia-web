@@ -76,14 +76,50 @@
 </div>
 
 <div class="habilidades-estilo fixed-element" style="z-index: 300;">
-        <span class="button-2 heartbeat-1">COMPOSER</span>
+    <span class="button-2 heartbeat-1">COMPOSER</span>
+    <span class="button-2 heartbeat-1">DJ</span>
     <span class="button-2 heartbeat-1">REC</span>
     <span class="button-2 heartbeat-2">MIX</span>
     <span class="button-2 heartbeat-3">PRODUCTION</span>
     <span class="button-2 heartbeat-3">ALSO I LIKE TO DANCE</span>
 </div>
     
+<div class="text-1" style="position: absolute; top: 60%; left: 17%; scale: 200%; z-index: 100;">
+    Used to play drums, then guitar, now electronic music.
+    <br>
+    probably go back to drums.
+    <br>
+    I'm part of <a href="https://instagram.com/konventklub" target="_blank" style="color: #ffffff;">Konvent Klub</a> as a DJ.
+    <br>
+    Currently making music.
+    <br>
+    Nothing online, yet.
 
+
+</div>
+
+<div style="position: absolute; top:18%; right: 15%; z-index: 800; rotate: 3deg;">
+    <div class="image-wrapper" style="width: 400px; height: auto;">
+        <video id="kkVideo"
+            src="https://res.cloudinary.com/djddsm416/video/upload/v1755124901/KK_2025-Kontrast_COPIA-reel_ofzus7.mp4"
+            autoplay loop muted playsinline style="width: 100%; border-radius: 8px; cursor:pointer;"></video>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('kkVideo');
+    video.addEventListener('click', function() {
+        video.muted = !video.muted;
+    });
+});
+</script>
+
+
+<div class="text-1" style="position: absolute; top: 120%; left: 17%; scale: 200%; z-index: 100;">
+RECORDS where I did things
+
+
+</div>
 
   <script>
 const images = [
@@ -233,7 +269,7 @@ function distributeImages() {
     const chaosLevel = 0.5;
     
     const minMargin = 50;
-    const topMargin = 200;
+    const topMargin = 1200;
     const rowSpacing = 500; 
     const windowWidth = window.innerWidth - (minMargin * 2);
     

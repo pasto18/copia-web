@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include 'head.html'; ?>
-    <title>COPIA - HOME</title>
+    <title>COPIA</title>
     <link rel="stylesheet" href="style.css">
+    
     <style>
         body {
             background-color: #000;
@@ -61,7 +62,6 @@
             <a class="button-1" href="others.html" rel="history">OTHERS</a>
         </div>
 
-            <a class="info-1" href="others.html" style="position: absolute; top: 90%; z-index: 2000; left: 3%; font-size: 1.5rem; text-align: center; width: 20%;" rel="history">ABOUT & CONTACT</a>
 
 
     <!-- TUS IMÁGENES (funcionan igual que antes) -->
@@ -73,32 +73,13 @@
 
 
 
+<div style="position: absolute; right: 3%; bottom: 7%; z-index: 2000; width: 22%; min-width: 200px; display: flex; flex-direction: column; align-items: center;">
+    <a class="info-1" href="about.html" style="font-size: 1.5rem; text-align: center; width: 100%; z-index: 21;" rel="history">ABOUT & CONTACT</a>
+    <div style="width: 50%; margin-top: 10px; rotate: -7deg;">
+        <img id="copia-musica" src="https://res.cloudinary.com/djddsm416/image/upload/v1754605395/COPIA-perfil_LOW_odpsxz.jpg" alt="Imagen 1" class="draggable" style="max-width: 100%; bottom: 8%;z-index: 20;">
+    </div>
+</div>
 
-    <img id="copia-musica" src="https://res.cloudinary.com/djddsm416/image/upload/v1754605395/COPIA-perfil_LOW_odpsxz.jpg" alt="Imagen 1" class="draggable" style="max-width: 12%; top: 60%; left: 05%; z-index: 900;">
-
-    <img id="cabra-sonido" src="https://res.cloudinary.com/djddsm416/image/upload/v1754825098/cabrita_hmoo6j.png" alt="Imagen 1" class="draggable" style="max-width: 12%; top: 100px; left: 10rem; z-index: 999;">
-
-    <img src="https://res.cloudinary.com/djddsm416/image/upload/v1754825152/posttraumatic-tapa_lgeiqv.png" alt="Imagen 1" class="draggable" style="max-width: 14%; top: 65%; left: 80%; z-index: 800; rotate: 20deg;">
-
-
-    <video 
-        src="https://res.cloudinary.com/djddsm416/video/upload/v1754604141/MAT_TramaTeaser-8_ljcy2s.mp4" 
-        class="draggable" 
-        autoplay 
-        muted 
-        loop
-        playsinline
-        style="width: 18%; top: 35%; left: 80%;">
-    </video>
-
-     <video
-        src="https://res.cloudinary.com/djddsm416/video/upload/v1754604138/BI_teaser1-v4_qyehrf.mp4" 
-        class="draggable" 
-        autoplay 
-        muted 
-        loop
-        playsinline
-style="width: 16%; top: 10%; left: 60%;">    </video>
     
      <video
         src="https://res.cloudinary.com/djddsm416/video/upload/v1754821580/COPIA_mago-1_gc79sp.mp4" 
@@ -107,7 +88,7 @@ style="width: 16%; top: 10%; left: 60%;">    </video>
         muted 
         loop
         playsinline
-style="width: 16%; top: 40%; left: 40%;">    </video>
+style="width: 16%; top: 10%; right: 30%; rotate: 2deg;">    </video>
 
 <video
         src="https://res.cloudinary.com/djddsm416/video/upload/v1754821570/KO_After-4-HQ_cot9fk.mp4" 
@@ -117,6 +98,40 @@ style="width: 16%; top: 40%; left: 40%;">    </video>
         loop
         playsinline
 style="width: 56%; top: 25%; left: 10%; z-index: 1;">    </video>
+
+<video
+        src="https://res.cloudinary.com/djddsm416/video/upload/v1754604138/BI_teaser1-v4_qyehrf.mp4" 
+        class="draggable" 
+        autoplay 
+        muted 
+        loop
+        playsinline
+        style="width:16%; top: 15%; right: 10%; z-index: 2;">    </video>
+
+
+
+<img id="cabra-sonido" src="https://res.cloudinary.com/djddsm416/image/upload/v1754825098/cabrita_hmoo6j.png" alt="Imagen 1" class="draggable" style="max-width: 12%; top: 100px; left: 10rem; z-index: 999;">
+
+<div style="position: absolute; top: 19px; right: 3%; max-width: 18%; z-index: 1; rotate: 2deg;">
+    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmxqazE1YnNhanNndjRlczc2c3Y1czZ4NWJlM204dWtsMWJuamhtaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UYkZqHsvhhQVW/giphy.gif"
+         style="max-width: 100%; display: block; cursor: pointer;">
+    <span class="text-1" id="stolen-gift-text" style="display: none; position: absolute; top: 0; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 1.3vw;">stolen gift</span>
+</div>
+
+
+
+<a class="text-1 blinking-text" style="position: absolute; left: 2%; bottom: 5%; z-index: 3000; font-size: 1.5vw;">
+    DON'T TOUCH the GOAT!
+</a>
+<style>
+    .blinking-text {
+        animation: blink 1s steps(2, start) infinite;
+    }
+    @keyframes blink {
+        to { visibility: hidden; }
+    }
+</style>
+
 
 <script>
     // --- Configuración inicial ---
