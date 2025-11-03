@@ -85,7 +85,6 @@
 	will-change: filter;
 	background: #e3ec3d;
 	text-decoration: none;
-
 }
 
 .button-1 a {
@@ -100,6 +99,48 @@
 
 .button-1:hover {
     scale: 1.15;
+}
+
+/* --- Adaptaciones para Móvil --- */
+@media (max-width: 768px) {
+    /*
+     * Primero adaptamos el contenedor de los botones para que
+     * los apile verticalmente y los centre.
+     * Asumo que es la clase '.menu-estilo' del HTML anterior.
+    */
+    .menu-estilo {
+        display: flex;
+        flex-direction: column; /* Apila los botones uno encima de otro */
+        align-items: center; /* Los centra horizontalmente */
+        width: 50%;
+        position: absolute;
+        top: 40vh; /* Lo posicionamos debajo del título */
+        left: 0;
+        z-index: 1000;
+    }
+
+    /*
+     * Ahora adaptamos los botones para que ocupen más espacio
+     * y sean más legibles y fáciles de pulsar.
+    */
+    .button-1 {
+        width: 90%; /* Ocupa casi todo el ancho de la pantalla */
+        margin-bottom: 0rem; /* Añade espacio entre los botones */
+        text-align: center; /* Centra el texto del botón */
+        font-size: 1.2rem; /* Aumenta el tamaño de la letra */
+        padding: 0.4rem 0.5rem; /* Aumenta el relleno para hacerlo más grande */
+        transform: translateX(7%);
+    }
+
+    /* Para evitar el efecto hover en táctil, que puede ser molesto */
+    .button-1:hover {
+        scale: 1;
+    }
+
+    /* Efecto al pulsar en móvil */
+    .button-1:active {
+        scale: 1.05;
+    }
 }
 
 .button-2 {
@@ -260,6 +301,24 @@
     pointer-events: none;
 }
 
+/* --- Adaptaciones para Móvil --- */
+@media (max-width: 768px) {
+    .titulo-estilo {
+        /* Centrado y posicionamiento */
+        left: 50%;
+        top: 0px; /* Un pequeño margen superior */
+        transform: translateX(-50%); /* Truco para centrar con position: fixed */
+        
+        /* Ajustes de tamaño y márgenes */
+        width: 100%; /* Ocupa todo el ancho para centrar el texto */
+        text-align: center; /* Centra el texto dentro del contenedor */
+        font-size: 6rem; /* Tamaño de fuente reducido para móviles */
+        margin: 0;
+        letter-spacing: -2px; /* Menos espaciado negativo para mejor legibilidad */
+        text-shadow: rgba(255, 0, 0, 0.91) .3rem .4rem; /* Sombra de texto más sutil */
+    }
+}
+
 .habilidades-estilo {
     position: fixed;
     margin-left: 32%;
@@ -296,7 +355,11 @@
     box-sizing: border-box;/* Importante para que el padding no cause desbordamiento */
     gap: .5rem; /* Un poco de espacio entre los botones */
 }
-
+@media (max-width: 768px) {
+    .menu-hor-estilo {
+        display: none; /* Hides the horizontal menu on mobile */
+    }
+}
 
 
 
@@ -406,3 +469,147 @@ font-family: "Bricolage Grotesque", sans-serif;
     animation-delay: 1s;
     display: inline-block; /* Mantiene el flujo original */
 }
+
+/* --- Adaptaciones para el contenedor de info en Móvil --- */
+@media (max-width: 768px) {
+    .info-container {
+        /* 1. Posiciona el contenedor en la parte inferior y que ocupe todo el ancho */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+        
+        /* 2. Cambia la dirección a horizontal y alinea los elementos */
+        justify-content: space-between !important;
+        
+    }
+
+    /* 4. Ajusta el tamaño y estilos del DIV contenedor de la imagen */
+    .info-container > div {
+        width: 35% !important; 
+        max-width: 100px !important; /* Reducido un poco para dar espacio al botón */
+        margin-top: 0 !important;
+        rotate: 0deg !important;
+        
+        /* Asegura que la imagen interna se alinee a la izquierda (en su DIV) */
+        display: flex !important; 
+        justify-content: flex-start !important;
+        display: none !important;
+    }
+    
+    /* 4.1. SOBREESCRIBE los estilos del elemento ARRASTRABLE (#copia-musica) */
+    #copia-musica.draggable {
+        position: static !important; 
+        /* position: static hace que la imagen respete el layout de Flexbox */
+        
+        max-width: 100% !important; 
+        left: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+    }
+    
+    /* 5. Ajusta el tamaño y la alineación del texto del botón */
+    .info-container > a.info-1 {
+        width: 100% !important; /* Le damos más espacio al botón para el texto */
+        text-align: center !important; /* Alinea el texto a la derecha */
+        font-size: 1.2rem !important; /* Un poco más pequeño para que quepa */
+        line-height: 1.2; /* Mejora la legibilidad si el texto es largo */
+    }
+}
+
+/* Add these styles after your existing .menu-hor-estilo media query */
+
+.mobile-menu {
+    display: none; /* Hidden by default on desktop */
+}
+
+@media (max-width: 768px) {
+    .mobile-menu {
+        display: block;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+    }
+
+    .mobile-menu-button.button-1 {
+        font-size: 2rem;
+        text-align: center;
+        filter: none; /* Removes the shadow effect */
+        background: #e3ec3d;
+        border-color: #ff0000;
+        border-width: 0.2rem;
+        cursor: pointer;
+    }
+}
+
+    .mobile-menu-items {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        flex-direction: column;
+        gap: 1rem;
+        padding-top: 1rem;
+    }
+
+    .mobile-menu-items.active {
+        display: flex;
+    }
+
+    /* Hide horizontal menu on mobile */
+    .menu-hor-estilo {
+        display: none;
+    }
+}
+
+<style>
+    // ...existing styles...
+
+    /* Mobile Gallery Styles */
+    .mobile-gallery {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .mobile-gallery {
+            display: block;
+            position: fixed;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            transform: translateY(-50%);
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 20px 0;
+            z-index: 100;
+        }
+
+        .mobile-gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mobile-gallery-container {
+            display: inline-flex;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .mobile-gallery-item {
+            width: 80vw;
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        .mobile-gallery-item img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+    }

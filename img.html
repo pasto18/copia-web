@@ -10,13 +10,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Press+Start+2P&family=Quicksand:wght@300..700&family=VT323&display=swap" rel="stylesheet">
 
 <style>
+    /* 
+    *** ERRORES CORREGIDOS EN CSS ***
+    * Se ha añadido un punto y coma después de la declaración 'background' en body.
+    * Los estilos móviles de la galería se han movido a este bloque <style> ya que estaban al final.
+    */
     html, body {
         margin: 0;
         padding: 0;
         overflow-x: hidden;
     }
      body {
-            background: linear-gradient(45deg, #ffbf00, #FFFF00)
+            background: linear-gradient(45deg, #ffbf00, #FFFF00);
             min-height: 150vh;
             margin: 0;
             background-attachment: fixed;
@@ -46,7 +51,67 @@
         position: fixed !important;
         transform: none !important;
     }
+
+    /* --- ESTILOS DE VISIBILIDAD DE GALERÍA EN ESCRITORIO --- */
+    .mobile-gallery {
+        display: none; /* Oculta la galería móvil por defecto (escritorio) */
+    }
+    .video-container:not(.fixed-element) {
+        display: block; /* Muestra los elementos arrastrables por defecto (escritorio) */
+    }
+
+
+    /* --- ESTILOS DE VISIBILIDAD DE GALERÍA EN MÓVIL (Ancho max 768px) --- */
+    @media (max-width: 768px) {
+        .mobile-gallery {
+            display: block; /* Muestra la galería móvil en pantallas pequeñas */
+            position: fixed;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            transform: translateY(-50%);
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 20px 0;
+            z-index: 100;
+        }
+
+        .video-container:not(.fixed-element) {
+            display: none; /* Oculta los elementos arrastrables de escritorio en pantallas pequeñas */
+        }
+        
+        .mobile-gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mobile-gallery-container {
+            display: inline-flex;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .mobile-gallery-item {
+            width: 80vw;
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        .mobile-gallery-item img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+    }
 </style>
+
+
+
+
+
 </head>
 <body>
    <video class="background-video fixed-element" autoplay loop muted playsinline>
@@ -59,14 +124,26 @@
         <a class="button-1" href="img.html" rel="history">IMG</a>
         <a class="button-1" href="music.html" rel="history">MUSIC</a>
         <a class="button-1" href="others.html" rel="history">OTHERS</a>
-
-            
+</div> <!-- Corregido: div de cierre para menu-hor-estilo -->
     
-        </div>
-    
-
-<div class="titulo-estilo fixed-element">
+<div class="mobile-menu">
+    <button class="button-1 mobile-menu-button">☰</button>
+    <div class="mobile-menu-items">
+        <a class="button-1" href="#">HOME</a>
+        <a class="button-1" href="#">VIDEO</a>
+        <a class="button-1" href="#">MUSIC</a>
+        <a class="button-1" href="#">OTHERS</a>
+    </div>
+</div>
+        
+<div class="titulo-estilo" style="transform: translateX(-35%);">
     IMG
+</div>
+
+<div class="mobile-gallery">
+    <div class="mobile-gallery-container">
+        <!-- Images will be loaded here -->
+    </div>
 </div>
 
 <div class="habilidades-estilo fixed-element">
@@ -74,33 +151,22 @@
     <span class="button-2 heartbeat-2">AI</span>
     <span class="button-2 heartbeat-3">3D</span>
 </div>
-        </div>
-
-
-
-
-
-
-
-    <!-- IMAGENES! -->
-
-
-
-   
-
-
-
-
-
 
 <script>
 // --- Configuración ---
-const CLOUD_NAME = "djddsm416"; // ¡Tu nombre de nube de Cloudinary!
-const TAG_NAME = "img"; // La etiqueta que usaste en Cloudinary
+const CLOUD_NAME = "djddsm416";
+const TAG_NAME = "img"; 
 
-// --- Lógica de la Galería ---
-// --- Lógica de la Galería ---
+// --- Lógica de la Galería y Arrastre (COMBINADA Y SIMPLIFICADA) ---
+let highestZIndex = 100;
+let activeContainer = null;
+let initialX, initialY;
+let clickStartTime;
+
+// Función principal para obtener y crear imágenes
 async function fetchAndCreateImages() {
+    // Solo cargar la galería si es relevante para la vista actual (mejorar rendimiento)
+    const isMobile = window.innerWidth <= 768;
     const apiUrl = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/${TAG_NAME}.json`;
 
     try {
@@ -114,68 +180,71 @@ async function fetchAndCreateImages() {
         }
 
         const container = document.querySelector('body');
+        const mobileContainer = document.querySelector('.mobile-gallery-container');
+
         data.resources.forEach(img => {
-            const div = document.createElement('div');
-            div.className = 'video-container draggable';
+            const url = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/v${img.version}/${img.public_id}.${img.format}`;
+            const altText = img.public_id;
 
-            // --- LÓGICA DE TAMAÑO COMBINADA (RESPONSIVE + LÍMITES) ---
+            // Versión de Escritorio (solo si no es móvil)
+            if (!isMobile) {
+                const desktopDiv = document.createElement('div');
+                desktopDiv.className = 'video-container draggable';
 
-            // 1. LÍMITES MÁXIMOS: La caja de contención invisible.
-            const MAX_ALLOWED_WIDTH = 600;
-            const MAX_ALLOWED_HEIGHT = 550;
+                const MAX_ALLOWED_WIDTH = 600;
+                const MAX_ALLOWED_HEIGHT = 550;
+                const PERCENT_OF_SCREEN = 0.45;
+                const initialWidth = window.innerWidth * PERCENT_OF_SCREEN;
+                
+                desktopDiv.style.width = `${initialWidth}px`; 
+                desktopDiv.style.maxWidth = `${MAX_ALLOWED_WIDTH}px`;
+                desktopDiv.style.maxHeight = `${MAX_ALLOWED_HEIGHT}px`;
+                desktopDiv.style.cursor = 'grab';
 
-            // 2. TAMAÑO INICIAL RESPONSIVE: Para que se distribuyan bien.
-            const PERCENT_OF_SCREEN = 0.45; // 45% del ancho de la pantalla
-            const initialWidth = window.innerWidth * PERCENT_OF_SCREEN;
-            
-            // 3. APLICAMOS TODO AL 'div'
-            // Le damos un tamaño inicial para que la función 'distributeImages' sepa cómo colocarlos.
-            div.style.width = `${initialWidth}px`; 
-            
-            // Y le ponemos los topes para que no crezcan indefinidamente.
-            div.style.maxWidth = `${MAX_ALLOWED_WIDTH}px`;
-            div.style.maxHeight = `${MAX_ALLOWED_HEIGHT}px`;
-            
-            // --- FIN DE LA LÓGICA DE TAMAÑO ---
+                const imgElement = document.createElement('img');
+                imgElement.src = url;
+                imgElement.alt = altText;
+                imgElement.style.width = 'auto'; 
+                imgElement.style.height = 'auto'; 
+                imgElement.setAttribute('draggable', 'false');
 
-            div.style.cursor = 'grab';
+                desktopDiv.appendChild(imgElement);
+                container.appendChild(desktopDiv);
+                
+                // Adjuntar el listener de arrastre
+                desktopDiv.addEventListener('mousedown', handleDragStart);
+            }
 
-            const imgElement = document.createElement('img');
-            imgElement.src = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/v${img.version}/${img.public_id}.${img.format}`;
-            imgElement.alt = img.public_id;
-
-            // ESTO SE MANTIENE IGUAL Y ES LA CLAVE PARA NO DEFORMAR
-            imgElement.style.width = 'auto'; 
-            imgElement.style.height = 'auto'; 
-            imgElement.setAttribute('draggable', 'false');
-
-            div.appendChild(imgElement);
-            container.appendChild(div);
-
-            div.addEventListener('mousedown', handleDragStart);
+            // Versión Móvil (solo si es móvil)
+            if (isMobile && mobileContainer) {
+                const mobileDiv = document.createElement('div');
+                mobileDiv.className = 'mobile-gallery-item';
+                const mobileImg = document.createElement('img');
+                mobileImg.src = url;
+                mobileImg.alt = altText;
+                mobileDiv.appendChild(mobileImg);
+                mobileContainer.appendChild(mobileDiv);
+            }
         });
         
-        // ¡IMPORTANTE! Llamamos a distributeImages DESPUÉS de que todas las imágenes se hayan creado.
-        setTimeout(distributeImages, 100);
+        // Distribuir las imágenes de escritorio (solo si no es móvil)
+        if (!isMobile) {
+            setTimeout(distributeImages, 100);
+        }
 
     } catch (error) {
         console.error("No se pudieron cargar las imágenes de la galería:", error);
     }
 }
 
-// ... (El resto de tu script de arrastre y demás sigue igual) ...
 
-
-// --- Lógica de Arrastre (mejorada y centralizada) ---
-let highestZIndex = 100;
-let activeContainer = null;
-let initialX, initialY;
-let clickStartTime;
-
+// --- Lógica de Arrastre (única) ---
 function handleDragStart(e) {
     e.preventDefault();
+    if (window.innerWidth <= 768) return; 
+
     clickStartTime = new Date().getTime();
-    activeContainer = this; // 'this' es el div que recibió el click
+    activeContainer = this; 
 
     highestZIndex++;
     activeContainer.style.zIndex = highestZIndex;
@@ -184,7 +253,6 @@ function handleDragStart(e) {
     initialX = e.clientX - activeContainer.offsetLeft;
     initialY = e.clientY - activeContainer.offsetTop;
 
-    // Empezamos a escuchar los movimientos y el "soltar" en todo el documento
     document.addEventListener('mousemove', handleDragging);
     document.addEventListener('mouseup', handleDragEnd);
 }
@@ -204,7 +272,6 @@ function handleDragEnd(e) {
     const clickEndTime = new Date().getTime();
     const timeDiff = clickEndTime - clickStartTime;
 
-    // Detectar si fue un click corto (para hacer zoom)
     if (timeDiff < 200) {
         const isScaled = activeContainer.style.transform.includes('scale(1.5)');
         activeContainer.style.transform = isScaled ? '' : 'scale(1.5)';
@@ -212,25 +279,17 @@ function handleDragEnd(e) {
 
     activeContainer.style.cursor = 'grab';
     
-    // Dejamos de escuchar eventos, ¡muy importante!
     document.removeEventListener('mousemove', handleDragging);
     document.removeEventListener('mouseup', handleDragEnd);
 
-    // Guardar posición
     savePosition(activeContainer);
     
     activeContainer = null;
 }
 
-
-// --- Inicialización ---
-document.addEventListener('DOMContentLoaded', fetchAndCreateImages);
-
-</script>
-
-
-<script>
+// --- Lógica de Posicionamiento (Almacenamiento Local) ---
 function savePosition(container) {
+    if (!container.querySelector('img')) return;
     const positions = JSON.parse(localStorage.getItem('imagePositions') || '{}');
     positions[container.querySelector('img').alt] = {
         left: container.style.left,
@@ -252,39 +311,27 @@ function exportPositions() {
     console.log(code);
 }
 
-document.addEventListener('mouseup', () => {
-    if (!activeContainer) return;
-    savePosition(activeContainer);
-    // ...existing code...
-});
-</script>
 
-
-
-
-<script>
+// --- Lógica de Distribución de Imágenes (distributeImages) ---
 function distributeImages() {
+    if (window.innerWidth <= 768) return; 
+
     const containers = document.querySelectorAll('.video-container:not(.fixed-element)');
-    const gridSize = 4; // Número de elementos por fila
+    const gridSize = 4;
     const chaosLevel = 0.5;
-    
     const minMargin = 50;
     const topMargin = 200;
-    const rowSpacing = 500; // Espacio vertical entre filas
+    const rowSpacing = 500;
     const windowWidth = window.innerWidth - (minMargin * 2);
-    
     const cellWidth = windowWidth / gridSize;
     
     containers.forEach((container, index) => {
-        const col = index % gridSize; // Posición horizontal (0-4)
-        const row = Math.floor(index / gridSize); // Fila (incrementa cada 5 elementos)
-        
+        const col = index % gridSize; 
+        const row = Math.floor(index / gridSize); 
         const randomX = (Math.random() - 0.5) * cellWidth * chaosLevel;
         const randomY = (Math.random() - 0.5) * rowSpacing * chaosLevel;
-        
         const baseX = minMargin + (col * cellWidth) + (cellWidth/2) - parseInt(container.style.width)/2;
-        const baseY = topMargin + (row * rowSpacing); // Usar rowSpacing para separación vertical
-        
+        const baseY = topMargin + (row * rowSpacing);
         const finalX = baseX + randomX;
         const finalY = baseY + randomY;
         
@@ -294,21 +341,44 @@ function distributeImages() {
     });
 }
 
-// Run on page load
-window.addEventListener('load', distributeImages);
+
+// --- Lógica del Menú Móvil ---
+document.addEventListener('DOMContentLoaded', function() {
+    const menuButton = document.querySelector('.mobile-menu-button');
+    const menuItems = document.querySelector('.mobile-menu-items');
+
+    if (menuButton && menuItems) {
+        menuButton.addEventListener('click', function() {
+            menuItems.classList.toggle('active');
+        });
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.mobile-menu')) {
+                menuItems.classList.remove('active');
+            }
+        });
+    }
+});
+
+
+// --- Inicialización de Eventos de Carga ---
+document.addEventListener('DOMContentLoaded', fetchAndCreateImages);
 
 // Run on window resize
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(distributeImages, 100);
+    // Si la ventana cruza el umbral de móvil/escritorio, recarga para renderizar la galería correcta
+    const wasMobile = window.innerWidth <= 768;
+    
+    resizeTimeout = setTimeout(() => {
+        const isMobile = window.innerWidth <= 768;
+        if (wasMobile !== isMobile) {
+             window.location.reload();
+        } else if (!isMobile) {
+            distributeImages();
+        }
+    }, 200);
 });
 </script>
-
-
-
-
-
-
 </body>
 </html>
