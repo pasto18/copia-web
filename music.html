@@ -65,11 +65,17 @@
         <a class="button-1" href="img.html" rel="history">IMG</a>
         <a class="button-1" href="music.html" rel="history">MUSIC</a>
         <a class="button-1" href="others.html" rel="history">OTHERS</a>
+</div>
+    
+<div class="mobile-menu">
+    <button class="button-1 mobile-menu-button">☰</button>
+    <div class="mobile-menu-items">
+        <a class="button-1" href="index.html">HOME</a>
+        <a class="button-1" href="video.html">VIDEO</a>
+        <a class="button-1" href="music.html">MUSIC</a>
+        <a class="button-1" href="others.html">OTHERS</a>
+    </div>
 
-            
-    
-        </div>
-    
 
 <div class="titulo-estilo fixed-element">
     MUSIC
@@ -313,6 +319,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 100); 
 });
+
+
+// --- Lógica del Menú Móvil ---
+document.addEventListener('DOMContentLoaded', function() {
+    const menuButton = document.querySelector('.mobile-menu-button');
+    const menuItems = document.querySelector('.mobile-menu-items');
+
+    if (menuButton && menuItems) {
+        menuButton.addEventListener('click', function() {
+            menuItems.classList.toggle('active');
+        });
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.mobile-menu')) {
+                menuItems.classList.remove('active');
+            }
+        });
+    }
+});
+
+
+// --- Inicialización de Eventos de Carga ---
+document.addEventListener('DOMContentLoaded', fetchAndCreateImages);
+
+// Run on window resize
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    // Si la ventana cruza el umbral de móvil/escritorio, recarga para renderizar la galería correcta
+    const wasMobile = window.innerWidth <= 768;
+    
+    resizeTimeout = setTimeout(() => {
+        const isMobile = window.innerWidth <= 768;
+        if (wasMobile !== isMobile) {
+             window.location.reload();
+        } else if (!isMobile) {
+            distributeImages();
+        }
+    }, 200);
+});
+
 </script>
 
     

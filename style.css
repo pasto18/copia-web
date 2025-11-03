@@ -623,3 +623,76 @@ font-family: "Bricolage Grotesque", sans-serif;
             border-radius: 8px;
         }
     }
+
+    /* Mobile Video Gallery Styles */
+    .mobile-video-gallery {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        /* Hide desktop videos */
+        .video-container:not(.fixed-element) {
+            display: none;
+        }
+
+        .mobile-video-gallery {
+            display: block;
+            position: fixed;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .mobile-video-container {
+            width: 100%;
+            height: auto;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            padding: 20px 0;
+        }
+
+        .mobile-video-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mobile-video-item {
+            display: inline-block;
+            width: 85vw;
+            margin-right: 20px;
+            vertical-align: top;
+        }
+
+        .mobile-video-item video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .mobile-video-caption {
+            position: fixed;
+            bottom: 60px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            z-index: 101;
+        }
+
+        .mobile-video-secondary-caption {
+            position: fixed;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            z-index: 101;
+        }
+    }

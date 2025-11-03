@@ -10,6 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Press+Start+2P&family=Quicksand:wght@300..700&family=VT323&display=swap" rel="stylesheet">
 
 <style>
+    /*
+      HE UNIFICADO LOS ESTILOS DE VISIBILIDAD DE VIDEOS PARA MÓVIL/ESCRITORIO
+    */
     html, body {
         margin: 0;
         padding: 0;
@@ -39,8 +42,26 @@
         max-width: 100vw;
         will-change: transform;
         transform-style: preserve-3d;
+        /* Asegura que los videos internos se escalen */
+        display: block;
+        cursor: grab;
+    }
+    
+    .video-container video {
+        width: 100%;
+        height: auto;
+        display: block;
     }
 
+    @media (max-width: 768px) {
+        .video-container:not(.fixed-element) {
+            display: none !important; /* Oculta videos de escritorio */
+        }
+        .mobile-video-gallery {
+            display: block; /* Muestra la galería móvil */
+        }
+    }
+    
     .fixed-element {
         position: fixed !important;
         transform: none !important;
@@ -48,15 +69,91 @@
 
     #bouncingImage {
             position: absolute;
-            width: 150px; /* Tamaño de la imagen, ajusta si es necesario */
+            width: 150px; 
             height: auto;
-            user-select: none; /* Evita que se pueda seleccionar el texto/imagen */
-            pointer-events: none; /* Evita que el cursor interactúe con la imagen */
-            /* Inicialmente fuera de la pantalla para que aparezca animado o en una posición random */
+            user-select: none;
+            pointer-events: none;
             left: 0; 
             top: 0;
             z-index: 800;
         }
+ #mobile-video-gallery {
+            display: none;
+        }
+
+        /* ------------------------------------- */
+        /* --- ESTILOS SÓLO PARA MÓVILES (<= 768px) --- */
+        /* ------------------------------------- */
+        @media (max-width: 768px) {
+            #mobile-video-gallery {
+                display: flex; /* Muestra la galería en móvil */
+                flex-direction: column; /* Apila los elementos verticalmente */
+                align-items: center; /* Centra horizontalmente toda la columna */
+                width: 100%;
+                padding: 10px 0;
+                box-sizing: border-box;
+            }
+
+            .video-item {
+                width: 100%; /* Ocupa la mayor parte del ancho */
+                max-width: 400px; /* Limita el tamaño en tablets */
+                margin-bottom: 10px; /* Espacio entre videos */
+                background-color: #222;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            }
+
+            .video-item video {
+                width: 100%;
+                height: auto;
+                display: block;
+                cursor: pointer;
+            }
+
+            .link-button-container {
+                padding: 15px;
+                text-align: center;
+            }
+
+            .link-button {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+                transition: background-color 0.2s;
+            }
+
+            .link-button:hover {
+                background-color: #0056b3;
+            }
+        }
+@media (max-width: 768px) {
+    /* ... Tus estilos de móvil ... */
+    
+    .video-item {
+        /* ... tus estilos de video-item ... */
+        transition: transform 0.3s ease-in-out, z-index 0s; /* Asegura una transición suave */
+    }
+
+    /* CLASE APLICADA POR JS CUANDO EL VIDEO ESTÁ ACTIVO */
+    .video-item.expanded {
+        position: fixed; /* Lo saca del flujo para posicionarlo en el viewport */
+        top: 50%;
+        left: 50%;
+        width: 100vw; /* Expande al ancho de la ventana */
+        height: 100vh; /* Expande al alto de la ventana */
+        max-width: none; /* Ignora el max-width de 400px */
+        margin: 0;
+        transform: translate(-50%, -50%); /* Centra el elemento con el truco CSS */
+        z-index: 10000; /* Lo pone por encima de todo */
+        border-radius: 0;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -73,17 +170,21 @@
         <a class="button-1" href="img.html" rel="history">IMG</a>
         <a class="button-1" href="music.html" rel="history">MUSIC</a>
         <a class="button-1" href="others.html" rel="history">OTHERS</a>
+</div>
 
-            
-    
-        </div>
-
+<div class="mobile-menu">
+    <button class="button-1 mobile-menu-button">☰</button>
+    <div class="mobile-menu-items">
+        <a class="button-1" href="index.html">HOME</a>
+        <a class="button-1" href="video.html">VIDEO</a>
+        <a class="button-1" href="music.html">MUSIC</a>
+        <a class="button-1" href="others.html">OTHERS</a>
+    </div>
+</div>
 
 <div class="titulo-estilo fixed-element">
     VIDEO
 </div>
-
-
 
 <div class="habilidades-estilo fixed-element">
     <span class="button-2 heartbeat-1">REC</span>
@@ -93,316 +194,487 @@
     <span class="button-2 heartbeat-1">3D ANIMATION</span>
 </div>
         
+<div class="mobile-video-gallery">
+    <div class="mobile-video-container">
+        <!-- Videos will be created here by JavaScript from the desktop videos -->
+    </div>
+    <div class="mobile-video-secondary-caption"></div>
+</div>
 
 
+<!-- VIDEOS DE ESCRITORIO (DRAGGABLE) -->
 
-
-
-    <!-- VIDEOS! -->
-
-
-
-    <div class="video-container draggable" style="width: 300px; top: 50rem; left: 30rem;">
+<div class="video-container draggable" data-caption="COPIA_test#2" data-caption-secondary="REC/EDIT" style="width: 300px; top: 50rem; left: 30rem;">
     <video
         src="https://res.cloudinary.com/djddsm416/video/upload/v1754821570/COPIA_Brillo_v5_dy0cqh.mp4" 
         loop
         playsinline>
     </video>
     <div class="caption">COPIA_test#2</div>
-     <div class="caption-secondary">REC/EDIT</div>
-
+    <div class="caption-secondary">REC/EDIT</div>
 </div>
 
- <div class="video-container draggable" style="width: 300px; top: 50rem; left: 50rem;">
+<div class="video-container draggable" data-caption="COPIA_test#2" data-caption-secondary="REC/EDIT" style="width: 300px; top: 50rem; left: 50rem;">
     <video
         src="https://res.cloudinary.com/djddsm416/video/upload/v1754821585/Trama-AFTER_zfi4qc.mp4" 
         loop
         playsinline>
     </video>
     <div class="caption">COPIA_test#2</div>
-     <div class="caption-secondary">REC/EDIT</div>
-
+    <div class="caption-secondary">REC/EDIT</div>
 </div>
 
-<div class="video-container draggable" style="width: 700px; top: 30rem; left: 40rem;">
+<div class="video-container draggable" data-caption="KONTRAST #5" data-caption-secondary="REC/EDIT" style="width: 700px; top: 30rem; left: 40rem;">
     <video
         src="https://res.cloudinary.com/djddsm416/video/upload/v1754821570/KO_After-4-HQ_cot9fk.mp4" 
         loop
         playsinline>
     </video>
     <div class="caption">KONTRAST #5</div>
-     <div class="caption-secondary">REC/EDIT</div>
-
+    <div class="caption-secondary">REC/EDIT</div>
 </div>
 
-<div class="video-container draggable" style="width: 300px; top: 30rem; left: 10rem;">
+<div class="video-container draggable" data-caption="TRAMA TATTOO FESTIVAL" data-caption-secondary="REC/EDIT/MOTION GRAPHICS" style="width: 300px; top: 30rem; left: 10rem;">
     <video 
         src="https://res.cloudinary.com/djddsm416/video/upload/v1754604141/MAT_TramaTeaser-8_ljcy2s.mp4" 
         loop
         playsinline></video>
     <div class="caption">TRAMA TATTOO FESTIVAL</div>
-         <div class="caption-secondary">REC/EDIT/MOTION GRAPHICS</div>
-
+    <div class="caption-secondary">REC/EDIT/MOTION GRAPHICS</div>
 </div>
 
-<div class="video-container draggable" style="width: 400px; top: 27px; left: 1040px;">
+<div class="video-container draggable" data-caption="BONExIKLECKTIC" data-caption-secondary="EDIT/MOTION GRAPHICS" style="width: 400px; top: 27px; left: 1040px;">
     <video
         src="https://res.cloudinary.com/djddsm416/video/upload/v1754604138/BI_teaser1-v4_qyehrf.mp4" 
         loop
         playsinline>
     </video>
     <div class="caption">BONExIKLECKTIC</div>
-             <div class="caption-secondary">EDIT/MOTION GRAPHICS</div>
-
+    <div class="caption-secondary">EDIT/MOTION GRAPHICS</div>
 </div>
 
-
-</div>
-
-<div class="video-container draggable" style="width: 300px; top: 10rem; left: 52rem;">
+<div class="video-container draggable" data-caption="COPIA_test#1" data-caption-secondary="EDIT/3D ANIMATION" style="width: 300px; top: 10rem; left: 52rem;">
     <video
         src="https://res.cloudinary.com/djddsm416/video/upload/v1754821580/COPIA_mago-1_gc79sp.mp4" 
         loop
         playsinline>
     </video>
     <div class="caption">COPIA_test#1</div>
-             <div class="caption-secondary">EDIT/3D ANIMATION</div>
-
+    <div class="caption-secondary">EDIT/3D ANIMATION</div>
 </div>
 
+<!-- FIN DE VIDEOS DE ESCRITORIO -->
 
-
-
-
-
-
-
-
-
-
-   <script>
-    let highestZIndex = 100;
-    // Modificar el selector para solo seleccionar los videos arrastrables
-    let videos = document.querySelectorAll('.video-container:not(.fixed-element)');
-
-    // Configurar posiciones iniciales
-    videos.forEach((container, index) => {
-        if (!container.classList.contains('fixed-element')) {
-            container.dataset.speed = 0.15 + (index * 0.2);
-            container.dataset.offsetY = container.style.top;
-        }
-    });
-
-    function parallax() {
-        const scrolled = window.pageYOffset;
+<div id="mobile-video-gallery">
         
-        videos.forEach(container => {
-            if (!container.classList.contains('fixed-element')) {
-                const speed = container.dataset.speed;
-                const yPos = -(scrolled * speed);
-                
-                const currentTransform = container.style.transform;
-                const scaleMatch = currentTransform.match(/scale\((.*?)\)/);
-                const scale = scaleMatch ? scaleMatch[1] : '1';
-                
-                container.style.transform = `translateY(${yPos}px) scale(${scale})`;
-            }
-        });
-    }
+        <!-- VIDEO 1 -->
+        <div class="video-item">
+            <video 
+                src="https://res.cloudinary.com/djddsm416/video/upload/v1754821570/COPIA_Brillo_v5_dy0cqh.mp4" 
+                loop 
+                playsinline 
+                muted>
+            </video>
+        </div>
+
+        <!-- VIDEO 2 -->
+        <div class="video-item">
+            <video 
+                src="https://res.cloudinary.com/djddsm416/video/upload/v1754821585/Trama-AFTER_zfi4qc.mp4" 
+                loop 
+                playsinline 
+                muted>
+            </video>
+        </div>
+
+        <!-- VIDEO 3 -->
+        <div class="video-item">
+            <video 
+                src="https://res.cloudinary.com/djddsm416/video/upload/v1754604138/BI_teaser1-v4_qyehrf.mp4" 
+                loop 
+                playsinline 
+                muted>
+            </video>
+        </div>
+
+    </div>
 
 
-    // Agregar event listener para scroll
-    window.addEventListener('scroll', () => {
-        requestAnimationFrame(parallax);
-    });
 
-    // Rest of your existing dragging and click code
-    videos.forEach(container => {
-        let isDragging = false;
-        let currentX;
-        let currentY;
-        let initialX;
-        let initialY;
-        let startTime;
-        const video = container.querySelector('video');
 
-        container.style.transition = 'transform 0.2s ease-out';
 
-        container.addEventListener('mousedown', (e) => {
-            startTime = new Date().getTime();
-            isDragging = true;
-            container.classList.add('dragging');
-            
-            highestZIndex++;
-            container.style.zIndex = highestZIndex;
-            
-            initialX = e.clientX - container.offsetLeft;
-            initialY = e.clientY - container.offsetTop;
-        });
 
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
 
-            e.preventDefault();
-            
-            currentX = e.clientX - initialX;
-            currentY = e.clientY - initialY;
 
-            container.style.left = currentX + 'px';
-            container.style.top = currentY + 'px';
-        });
 
-        document.addEventListener('mouseup', (e) => {
-            if (isDragging) {
-                const endTime = new Date().getTime();
-                const timeDiff = endTime - startTime;
 
-                if (timeDiff < 200) {
-                    if (video.paused) {
-                        video.play();
-                        container.style.transform = 'scale(1.2)';
-                    } else {
-                        video.pause();
-                        container.style.transform = 'scale(1)';
-                    }
-                }
 
-                isDragging = false;
-                container.classList.remove('dragging');
-            }
-        });
-    });
-</script>
 
 
 
 
 
 <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const image = document.getElementById('bouncingImage');
+    // --- Configuración de Arrastre/Parallax ---
+    let highestZIndex = 100;
+    let activeContainer = null;
+    let videos = document.querySelectorAll('.video-container:not(.fixed-element)');
+
+    // Inicialización del Parallax (data attributes)
+    videos.forEach((container, index) => {
+        container.dataset.speed = 0.15 + (index * 0.05); // Reducido el incremento para menor caos
+        container.dataset.offsetY = container.offsetTop; // Posición original del top
+    });
+
+    function parallax() {
+        if (window.innerWidth <= 768) return; // Desactivar en móvil
+        const scrolled = window.pageYOffset;
+        
+        videos.forEach(container => {
+            const speed = parseFloat(container.dataset.speed);
+            const initialTop = parseFloat(container.dataset.offsetY);
             
-            // --- Configuración de la animación ---
-            const initialSpeed = 2; 
-            let x = 0; // Posición horizontal (relativa al documento)
-            let y = 0; // Posición vertical (relativa al documento)
-            let dx = initialSpeed; 
-            let dy = initialSpeed; 
-
-            // --- Obtener dimensiones de la imagen y la VENTANA VISIBLE ---
-            let imageWidth;
-            let imageHeight;
-            let viewportWidth;  // Ancho de la ventana visible
-            let viewportHeight; // Altura de la ventana visible
-
-            function updateDimensions() {
-                imageWidth = image.offsetWidth;
-                imageHeight = image.offsetHeight;
-                viewportWidth = window.innerWidth;
-                viewportHeight = window.innerHeight;
-            }
-
-            // --- Posición inicial aleatoria dentro del viewport actual ---
-            function setRandomInitialPosition() {
-                updateDimensions(); 
-                
-                // Posición inicial dentro del viewport actual
-                // Para que se posicione bien respecto al documento, sumamos el scrollY
-                x = Math.random() * (viewportWidth - imageWidth);
-                y = window.scrollY + Math.random() * (viewportHeight - imageHeight);
-                
-                const padding = 10;
-                if (x < padding) x = padding;
-                if (y < window.scrollY + padding) y = window.scrollY + padding; // Asegura que no suba del viewport
-                if (x > viewportWidth - imageWidth - padding) x = viewportWidth - imageWidth - padding;
-                if (y > window.scrollY + viewportHeight - imageHeight - padding) y = window.scrollY + viewportHeight - imageHeight - padding; // Asegura que no baje del viewport
-            }
+            // Calculamos el desplazamiento Parallax
+            const yPos = -(scrolled * speed); 
             
-            setRandomInitialPosition(); 
+            // Mantenemos la escala actual si existe (por el click/zoom)
+            const currentTransform = container.style.transform;
+            const scaleMatch = currentTransform.match(/scale\((.*?)\)/);
+            const scale = scaleMatch ? scaleMatch[1] : '1';
             
-            // --- Función para cambiar el color (HUE) ---
-            function changeHue() {
-                const randomHue = Math.random() * 360;
-                image.style.filter = `hue-rotate(${randomHue}deg)`;
-            }
+            container.style.transform = `translateY(${yPos}px) scale(${scale})`;
+        });
+    }
 
-            // --- Función de animación principal ---
-            function animate() {
-                // Mover la imagen
-                x += dx;
-                y += dy;
+    // --- Lógica de Arrastre y Play/Pause (Combinada) ---
+    videos.forEach(container => {
+        let isDragging = false;
+        let initialX, initialY;
+        let startTime;
+        const video = container.querySelector('video');
 
-                // Obtener el desplazamiento actual del scroll
-                const scrollY = window.scrollY;
+        // Listener para la función de arrastre/click
+        container.addEventListener('mousedown', (e) => {
+            if (window.innerWidth <= 768) return; // Desactivar en móvil
+            
+            e.preventDefault();
+            startTime = new Date().getTime();
+            container.style.cursor = 'grabbing';
+            isDragging = true;
+            
+            highestZIndex++;
+            container.style.zIndex = highestZIndex;
+            
+            initialX = e.clientX - container.offsetLeft;
+            initialY = e.clientY - container.offsetTop;
 
-                // --- Detección de colisiones con los bordes del VIEWPORT ---
-                
-                // Colisión con el borde derecho del viewport
-                if (x + imageWidth > viewportWidth) {
-                    x = viewportWidth - imageWidth; 
-                    dx = -initialSpeed; 
-                    changeHue(); 
-                } 
-                // Colisión con el borde izquierdo del viewport
-                else if (x < 0) {
-                    x = 0; 
-                    dx = initialSpeed; 
-                    changeHue(); 
+            // Añadir listeners para todo el documento
+            document.addEventListener('mousemove', handleDragging);
+            document.addEventListener('mouseup', handleDragEnd);
+        });
+        
+        // Función de arrastre se adjunta y se quita en mousedown/mouseup
+        function handleDragging(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            
+            let currentX = e.clientX - initialX;
+            let currentY = e.clientY - initialY;
+
+            container.style.left = currentX + 'px';
+            container.style.top = currentY + 'px';
+        }
+
+        function handleDragEnd(e) {
+            if (!isDragging) return;
+
+            const endTime = new Date().getTime();
+            const timeDiff = endTime - startTime;
+
+            container.style.cursor = 'grab';
+            
+            // Lógica de click (Play/Pause y Zoom)
+            if (timeDiff < 200) {
+                if (video.paused) {
+                    video.play();
+                    container.style.transform = container.style.transform + ' scale(1.2)';
+                } else {
+                    video.pause();
+                    
+                    // Quitar solo el scale(1.2) del transform actual
+                    const currentTransform = container.style.transform;
+                    container.style.transform = currentTransform.replace(/scale\(1\.2\)/, '').trim(); 
                 }
+            }
 
-                // Colisión con el borde inferior del viewport
-                // Se calcula el borde inferior del viewport en relación con el documento
-                if (y + imageHeight > scrollY + viewportHeight) {
-                    y = scrollY + viewportHeight - imageHeight; 
-                    dy = -initialSpeed; 
-                    changeHue(); 
-                } 
-                // Colisión con el borde superior del viewport
-                // Se calcula el borde superior del viewport en relación con el documento
-                else if (y < scrollY) {
-                    y = scrollY; 
-                    dy = initialSpeed; 
-                    changeHue(); 
-                }
+            isDragging = false;
+            
+            // Remover listeners de todo el documento
+            document.removeEventListener('mousemove', handleDragging);
+            document.removeEventListener('mouseup', handleDragEnd);
+        }
+    });
 
-                // Aplicar las nuevas posiciones al estilo de la imagen
-                image.style.left = `${x}px`;
-                image.style.top = `${y}px`;
+    // Agregar event listener para scroll
+    window.addEventListener('scroll', () => {
+        requestAnimationFrame(parallax);
+    });
 
-                // Solicitar el siguiente frame de animación
+</script>
+
+<script>
+    // --- Lógica de la Imagen DVD Botadora ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const image = document.getElementById('bouncingImage');
+        if (!image) return;
+
+        const initialSpeed = 2; 
+        let x = 0;
+        let y = 0;
+        let dx = initialSpeed; 
+        let dy = initialSpeed; 
+        let imageWidth, imageHeight, viewportWidth, viewportHeight;
+
+        function updateDimensions() {
+            imageWidth = image.offsetWidth;
+            imageHeight = image.offsetHeight;
+            viewportWidth = window.innerWidth;
+            viewportHeight = window.innerHeight;
+        }
+
+        function setRandomInitialPosition() {
+            updateDimensions(); 
+            x = Math.random() * (viewportWidth - imageWidth);
+            y = window.scrollY + Math.random() * (viewportHeight - imageHeight);
+            
+            const padding = 10;
+            if (x < padding) x = padding;
+            if (y < window.scrollY + padding) y = window.scrollY + padding; 
+            if (x > viewportWidth - imageWidth - padding) x = viewportWidth - imageWidth - padding;
+            if (y > window.scrollY + viewportHeight - imageHeight - padding) y = window.scrollY + viewportHeight - imageHeight - padding;
+        }
+        
+        setRandomInitialPosition(); 
+        
+        function changeHue() {
+            const randomHue = Math.random() * 360;
+            image.style.filter = `hue-rotate(${randomHue}deg)`;
+        }
+
+        function animate() {
+            // No animar en móvil
+            if (window.innerWidth <= 768) {
+                image.style.display = 'none';
                 requestAnimationFrame(animate);
+                return;
+            }
+            image.style.display = 'block';
+
+            x += dx;
+            y += dy;
+            const scrollY = window.scrollY;
+
+            // Colisión con el borde derecho/izquierdo del viewport
+            if (x + imageWidth > viewportWidth) {
+                x = viewportWidth - imageWidth; 
+                dx = -initialSpeed; 
+                changeHue(); 
+            } else if (x < 0) {
+                x = 0; 
+                dx = initialSpeed; 
+                changeHue(); 
             }
 
-            // --- Manejo del redimensionamiento de la ventana ---
-            // Y del SCROLLING (para ajustar la posición del logo si es necesario)
-            let eventTimeout;
-            window.addEventListener('resize', () => {
-                clearTimeout(eventTimeout);
-                eventTimeout = setTimeout(() => {
-                    updateDimensions();
-                    // Ajustar la posición si la imagen quedó fuera de los nuevos límites del viewport
-                    // Esto es importante para que no desaparezca si el viewport se encoge
-                    const currentScrollY = window.scrollY;
-                    if (x + imageWidth > viewportWidth) x = viewportWidth - imageWidth;
-                    if (y + imageHeight > currentScrollY + viewportHeight) y = currentScrollY + viewportHeight - imageHeight;
-                    if (x < 0) x = 0;
-                    if (y < currentScrollY) y = currentScrollY;
-                    image.style.left = `${x}px`;
-                    image.style.top = `${y}px`;
-                }, 250); 
+            // Colisión con el borde inferior/superior del viewport
+            if (y + imageHeight > scrollY + viewportHeight) {
+                y = scrollY + viewportHeight - imageHeight; 
+                dy = -initialSpeed; 
+                changeHue(); 
+            } else if (y < scrollY) {
+                y = scrollY; 
+                dy = initialSpeed; 
+                changeHue(); 
+            }
+
+            image.style.left = `${x}px`;
+            image.style.top = `${y}px`;
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            updateDimensions();
+            // Lógica para reajustar la posición de la imagen en caso de redimensionamiento (similar al resize)
+        });
+
+        // Iniciar la animación
+        animate();
+    });
+
+    // --- Lógica del Menú Móvil ---
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuButton = document.querySelector('.mobile-menu-button');
+        const menuItems = document.querySelector('.mobile-menu-items');
+
+        if (menuButton && menuItems) {
+            menuButton.addEventListener('click', function() {
+                menuItems.classList.toggle('active');
+            });
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.mobile-menu')) {
+                    menuItems.classList.remove('active');
+                }
+            });
+        }
+    });
+
+    // --- Lógica de Galería Móvil ---
+    function createMobileGallery() {
+        if (window.innerWidth > 768) return;
+
+        const container = document.querySelector('.mobile-video-container');
+        const mainCaption = document.querySelector('.mobile-video-caption');
+        const secondaryCaption = document.querySelector('.mobile-video-secondary-caption');
+        
+        // Limpiar galería antes de recrearla (por si hay resize)
+        container.innerHTML = ''; 
+
+        // Obtener todos los videos de escritorio para clonar su contenido
+        const desktopVideos = document.querySelectorAll('.video-container:not(.fixed-element)');
+        
+        desktopVideos.forEach(desktop => {
+            const videoSrc = desktop.querySelector('video').src;
+            const caption = desktop.dataset.caption;
+            const secondCaption = desktop.dataset.caption-secondary;
+
+            const mobileItem = document.createElement('div');
+            mobileItem.className = 'mobile-video-item';
+            
+            const video = document.createElement('video');
+            video.src = videoSrc;
+            video.loop = true;
+            video.playsinline = true;
+            
+            video.addEventListener('click', () => {
+                if (video.paused) {
+                    // Pausar todos los demás videos antes de reproducir este
+                    container.querySelectorAll('video').forEach(v => {
+                        if (v !== video) v.pause();
+                    });
+                    
+                    video.play();
+                    mainCaption.textContent = caption;
+                    secondaryCaption.textContent = secondCaption;
+                } else {
+                    video.pause();
+                    mainCaption.textContent = 'Pulsa un video para reproducir';
+                    secondaryCaption.textContent = '';
+                }
             });
 
-            // Opcional: Si quieres que el logo se reajuste inmediatamente al scrollear
-            // window.addEventListener('scroll', () => {
-            //     // Podrías ajustar la posición de Y aquí si el logo se saliera
-            //     // o resetear su posición si lo prefieres.
-            //     // Por ahora, como es 'absolute', se moverá con el scroll, lo cual es el efecto deseado.
-            // });
-
-            // Iniciar la animación
-            animate();
+            mobileItem.appendChild(video);
+            container.appendChild(mobileItem);
         });
-    </script>
+    }
+
+    // Inicializar la galería móvil al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+        createMobileGallery();
+    });
+
+    // Manejar eventos de redimensionamiento y orientación
+    window.addEventListener('resize', () => {
+        // Al redimensionar, si estamos en móvil, volvemos a crear la galería.
+        if (window.innerWidth <= 768) {
+            createMobileGallery();
+        }
+        // Si cruzamos el umbral (de móvil a escritorio o viceversa), recargar
+        // Este es un truco simple para resetear el layout completamente
+        const isMobile = window.innerWidth <= 768;
+        if (typeof window.isCurrentMobile === 'undefined') {
+            window.isCurrentMobile = isMobile;
+        } else if (window.isCurrentMobile !== isMobile) {
+            window.location.reload();
+        }
+    });
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+            const videoItems = document.querySelectorAll('.video-item video');
+
+            videoItems.forEach(video => {
+                // Al cargar la página, se ajusta a 'muted' para permitir el autoplay.
+                // Usamos 'touchstart' en lugar de 'click' para mejor respuesta táctil.
+                video.addEventListener('click', function() {
+                    if (this.paused) {
+                        // Pausa todos los demás videos antes de reproducir este
+                        videoItems.forEach(v => {
+                            if (v !== this && !v.paused) {
+                                v.pause();
+                            }
+                        });
+                        this.muted = false; // Desmutear para que se escuche al tocar
+                        this.play();
+                    } else {
+                        this.pause();
+                        this.muted = true; // Mutear al pausar para el siguiente toque
+                    }
+                });
+            });
+        });
+
+         // Función para quitar la clase 'expanded' a cualquier video activo
+    function resetExpandedVideo() {
+        const expandedVideo = document.querySelector('.video-item.expanded video');
+        const expandedItem = document.querySelector('.video-item.expanded');
+        
+        if (expandedVideo) {
+            expandedVideo.pause();
+            expandedVideo.muted = true; // Vuelve a mutear
+        }
+        if (expandedItem) {
+            expandedItem.classList.remove('expanded');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const videoItems = document.querySelectorAll('.video-item video');
+        
+        // Listener para el scroll: Desactiva el modo "expandido" al hacer scroll
+        // NOTA: Esto solo funcionará si el scroll principal del body no está bloqueado por otro elemento.
+        window.addEventListener('scroll', resetExpandedVideo, { passive: true });
+        
+        // Si tienes una galería con scroll horizontal, quizás necesites añadir el listener aquí:
+        // const galleryContainer = document.getElementById('mobile-video-gallery');
+        // if (galleryContainer) galleryContainer.addEventListener('scroll', resetExpandedVideo, { passive: true });
+        
+        videoItems.forEach(video => {
+            video.addEventListener('click', function() {
+                // Solo ejecutar esta lógica en móvil
+                if (window.innerWidth > 768) return; 
+
+                const parentItem = this.closest('.video-item');
+                const isExpanded = parentItem.classList.contains('expanded');
+
+                // 1. Si ya estaba expandido (toca por segunda vez)
+                if (isExpanded) {
+                    resetExpandedVideo();
+                } else {
+                    // 2. Si un video diferente está expandido, resetea primero
+                    resetExpandedVideo();
+                    
+                    // 3. Expande este video
+                    parentItem.classList.add('expanded');
+                    
+                    // 4. Reproduce (y desmutea)
+                    this.muted = false;
+                    this.play();
+                }
+            });
+        });
+    });
+</script>
 
 
 </body>

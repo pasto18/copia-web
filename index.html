@@ -48,6 +48,23 @@
             object-fit: cover;
             z-index: -1;
         }
+        
+        .blinking-text {
+            animation: blink 1s steps(2, start) infinite;
+        }
+        @keyframes blink {
+            to { visibility: hidden; }
+        }
+
+        /* --- Estilos para Móviles --- */
+        @media (max-width: 768px) {
+            .video-movil-oculto {
+                display: none;
+            }
+            .goat-related {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -55,83 +72,62 @@
         <source src="https://res.cloudinary.com/djddsm416/video/upload/v1754604890/TV_STATIC_4K_60FPS_bjfnpa.mp4" type="video/mp4">
     </video>
 
+       <div class="titulo-estilo">
+        COPIA
+    </div>
+    
     <div class="menu-estilo">
             <a class="button-1" href="video.html" rel="history">VIDEO</a>
             <a class="button-1" href="img.html" rel="history">IMG</a>
             <a class="button-1" href="music.html" rel="history">MUSIC</a>
             <a class="button-1" href="others.html" rel="history">OTHERS</a>
-        </div>
+    </div>
 
+ 
 
-
-    <!-- TUS IMÁGENES (funcionan igual que antes) -->
-
-    <div class="titulo-estilo">
-    COPIA
-</div>
-
-
-
-
-<div style="position: absolute; right: 3%; bottom: 7%; z-index: 2000; width: 22%; min-width: 200px; display: flex; flex-direction: column; align-items: center;">
-    <a class="info-1" href="about.html" style="font-size: 1.5rem; text-align: center; width: 100%; z-index: 21;" rel="history">ABOUT & CONTACT</a>
+    <!-- Añade la clase "info-container" al div principal -->
+<div class="info-container" style="position: absolute; right: 3%; bottom: 7%; z-index: 2000; width: 22%; min-width: 200px; display: flex; flex-direction: column; align-items: center;">
+    <a class="info-1" href="about.html" style="font-size: 1.5rem; text-align: center; width: 100%; z-index: 21;" rel="history">ABOUT & OTHERS</a>
     <div style="width: 50%; margin-top: 10px; rotate: -7deg;">
         <img id="copia-musica" src="https://res.cloudinary.com/djddsm416/image/upload/v1754605395/COPIA-perfil_LOW_odpsxz.jpg" alt="Imagen 1" class="draggable" style="max-width: 100%; bottom: 8%;z-index: 20;">
     </div>
 </div>
 
     
-     <video
+    <video
         src="https://res.cloudinary.com/djddsm416/video/upload/v1754821580/COPIA_mago-1_gc79sp.mp4" 
-        class="draggable" 
-        autoplay 
-        muted 
-        loop
-        playsinline
-style="width: 16%; top: 10%; right: 30%; rotate: 2deg;">    </video>
+        class="draggable video-movil-oculto" 
+        autoplay muted loop playsinline
+        style="width: 16%; top: 10%; right: 30%; rotate: 2deg;">
+    </video>
 
-<video
+    <video
         src="https://res.cloudinary.com/djddsm416/video/upload/v1754821570/KO_After-4-HQ_cot9fk.mp4" 
-        class="draggable" 
-        autoplay 
-        muted 
-        loop
-        playsinline
-style="width: 56%; top: 25%; left: 10%; z-index: 1;">    </video>
+        class="draggable video-movil-oculto" 
+        autoplay muted loop playsinline
+        style="width: 56%; top: 25%; left: 10%; z-index: 1;">
+    </video>
 
-<video
+    <video
         src="https://res.cloudinary.com/djddsm416/video/upload/v1754604138/BI_teaser1-v4_qyehrf.mp4" 
-        class="draggable" 
-        autoplay 
-        muted 
-        loop
-        playsinline
-        style="width:16%; top: 15%; right: 10%; z-index: 2;">    </video>
+        class="draggable video-movil-oculto" 
+        autoplay muted loop playsinline
+        style="width:16%; top: 15%; right: 10%; z-index: 2;">
+    </video>
 
+    <!-- Elementos de la cabra (se ocultarán en móvil por la clase .goat-related) -->
+    <img id="cabra-sonido" src="https://res.cloudinary.com/djddsm416/image/upload/v1754825098/cabrita_hmoo6j.png" alt="Imagen Cabra" class="draggable goat-related" style="max-width: 12%; top: 100px; left: 10rem; z-index: 999;">
+    
+    <a class="text-1 blinking-text goat-related" style="position: absolute; left: 2%; bottom: 5%; z-index: 3000; font-size: 1.5vw;">
+        DON'T TOUCH the GOAT!
+    </a>
+    <!-- Fin de elementos de la cabra -->
 
-
-<img id="cabra-sonido" src="https://res.cloudinary.com/djddsm416/image/upload/v1754825098/cabrita_hmoo6j.png" alt="Imagen 1" class="draggable" style="max-width: 12%; top: 100px; left: 10rem; z-index: 999;">
-
-<div style="position: absolute; top: 19px; right: 3%; max-width: 18%; z-index: 1; rotate: 2deg;">
-    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmxqazE1YnNhanNndjRlczc2c3Y1czZ4NWJlM204dWtsMWJuamhtaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UYkZqHsvhhQVW/giphy.gif"
-         style="max-width: 100%; display: block; cursor: pointer;">
-    <span class="text-1" id="stolen-gift-text" style="display: none; position: absolute; top: 0; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 1.3vw;">stolen gift</span>
-</div>
-
-
-
-<a class="text-1 blinking-text" style="position: absolute; left: 2%; bottom: 5%; z-index: 3000; font-size: 1.5vw;">
-    DON'T TOUCH the GOAT!
-</a>
-<style>
-    .blinking-text {
-        animation: blink 1s steps(2, start) infinite;
-    }
-    @keyframes blink {
-        to { visibility: hidden; }
-    }
-</style>
-
+    <div style="position: absolute; top: 19px; right: 3%; max-width: 18%; z-index: 1; rotate: 2deg;">
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmxqazE1YnNhanNndjRlczc2c3Y1czZ4NWJlM204dWtsMWJuamhtaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UYkZqHsvhhQVW/giphy.gif"
+             style="max-width: 100%; display: block; cursor: pointer;">
+        <span class="text-1" id="stolen-gift-text" style="display: none; position: absolute; top: 0; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 1.3vw;">stolen gift</span>
+    </div>
 
 <script>
     // --- Configuración inicial ---
@@ -164,10 +160,8 @@ style="width: 56%; top: 25%; left: 10%; z-index: 1;">    </video>
         initialX = e.clientX - activeElement.offsetLeft;
         initialY = e.clientY - activeElement.offsetTop;
 
-        // ¡AQUÍ AÑADIMOS EL LISTENER PARA EL MOVIMIENTO!
-        document.addEventListener('mousemove', drag); // <-- AÑADIDO
+        document.addEventListener('mousemove', drag);
 
-        // Si el elemento que agarramos es la cabra, detenemos su lógica de escape
         if (activeElement.id === 'cabra-sonido') {
             stopEscapeLogic();
             cabraSound.play();
@@ -194,12 +188,10 @@ style="width: 56%; top: 25%; left: 10%; z-index: 1;">    </video>
         copiaSound.pause();
         copiaSound.currentTime = 0;
 
-        // ¡AQUÍ QUITAMOS EL LISTENER PARA DEJAR DE MOVER!
-        document.removeEventListener('mousemove', drag); // <-- AÑADIDO
+        document.removeEventListener('mousemove', drag);
 
         if (!activeElement) return;
 
-        // Si soltamos la cabra, reiniciamos su lógica de escape
         if (activeElement.id === 'cabra-sonido') {
             startEscapeLogic();
         }
@@ -209,127 +201,88 @@ style="width: 56%; top: 25%; left: 10%; z-index: 1;">    </video>
     }
 </script>
     
-    <!-- ======================================================= -->
-    <!-- NUEVO SCRIPT: LÓGICA DE ESCAPE DE LA CABRA -->
-    <!-- ======================================================= -->
-    <script>
-        const cabra = document.getElementById('cabra-sonido');
-        let escapeInterval = null; // Variable para controlar el intervalo de movimiento
+<script>
+    const cabra = document.getElementById('cabra-sonido');
+    let escapeInterval = null; 
 
-        // --- PARÁMETROS PARA MODIFICAR EL COMPORTAMIENTO ---
+    const escapeDistance = 200; 
+    const escapeSpeed = 15;
+    const friction = 0.5;
 
-        // Distancia en píxeles. Si el cursor está más cerca que esto, la cabra se asusta.
-        // Un valor más pequeño hace que tengas que acercarte más para que huya.
-        const escapeDistance = 200; 
+    let vx = 0; 
+    let vy = 0;
 
-        // Velocidad de escape. Un número más alto hace que se mueva más rápido.
-        // Representa cuántos píxeles se mueve en cada "salto".
-        const escapeSpeed = 15;
+    function handleMouseMove(e) {
+        if (!cabra || window.getComputedStyle(cabra).display === 'none') return;
 
-        // Inercia o "fricción". Un valor entre 0 y 1.
-        // Un valor cercano a 1 (ej. 0.95) la hará deslizarse mucho.
-        // Un valor cercano a 0 (ej. 0.7) la hará parar en seco.
-        const friction = 0.5;
+        const cabraRect = cabra.getBoundingClientRect();
+        const cabraX = cabraRect.left + cabraRect.width / 2;
+        const cabraY = cabraRect.top + cabraRect.height / 2;
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
 
-        // Variables para la física del movimiento
-        let vx = 0; // Velocidad horizontal
-        let vy = 0; // Velocidad vertical
+        const dx = cabraX - mouseX;
+        const dy = cabraY - mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
-        function handleMouseMove(e) {
-            if (!cabra) return;
-
-            // Coordenadas del centro de la cabra
-            const cabraRect = cabra.getBoundingClientRect();
-            const cabraX = cabraRect.left + cabraRect.width / 2;
-            const cabraY = cabraRect.top + cabraRect.height / 2;
-
-            // Coordenadas del cursor
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-
-            // Calcular la distancia entre el cursor y la cabra
-            const dx = cabraX - mouseX;
-            const dy = cabraY - mouseY;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            // Si el cursor está lo suficientemente cerca...
-            if (distance < escapeDistance) {
-                // Calcular el ángulo de escape (dirección opuesta al cursor)
-                const angle = Math.atan2(dy, dx);
-                
-                // Aplicar una "fuerza" de escape a la velocidad
-                vx += Math.cos(angle) * escapeSpeed;
-                vy += Math.sin(angle) * escapeSpeed;
-            }
+        if (distance < escapeDistance) {
+            const angle = Math.atan2(dy, dx);
+            vx += Math.cos(angle) * escapeSpeed;
+            vy += Math.sin(angle) * escapeSpeed;
         }
+    }
+    
+    function updatePosition() {
+        if (!cabra || window.getComputedStyle(cabra).display === 'none') return;
+
+        vx *= friction;
+        vy *= friction;
+        let currentLeft = cabra.offsetLeft;
+        let currentTop = cabra.offsetTop;
+        let newLeft = currentLeft + vx;
+        let newTop = currentTop + vy;
         
-        // Función que actualiza la posición de la cabra continuamente
-        function updatePosition() {
-            if (!cabra) return;
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+        const cabraWidth = cabra.offsetWidth;
+        const cabraHeight = cabra.offsetHeight;
 
-            // Aplicar fricción para que la cabra se detenga eventualmente
-            vx *= friction;
-            vy *= friction;
+        if (newLeft < 0) { newLeft = 0; vx *= -1; }
+        if (newTop < 0) { newTop = 0; vy *= -1; }
+        if (newLeft > screenWidth - cabraWidth) { newLeft = screenWidth - cabraWidth; vx *= -1; }
+        if (newTop > screenHeight - cabraHeight) { newTop = screenHeight - cabraHeight; vy *= -1; }
 
-            // Obtenemos la posición actual
-            let currentLeft = cabra.offsetLeft;
-            let currentTop = cabra.offsetTop;
+        cabra.style.left = newLeft + 'px';
+        cabra.style.top = newTop + 'px';
+    }
 
-            // Calculamos la nueva posición
-            let newLeft = currentLeft + vx;
-            let newTop = currentTop + vy;
-            
-            // --- LÍMITES DE LA PANTALLA ---
-            // Para que no se escape fuera de la vista
-            const screenWidth = window.innerWidth;
-            const screenHeight = window.innerHeight;
-            const cabraWidth = cabra.offsetWidth;
-            const cabraHeight = cabra.offsetHeight;
-
-            if (newLeft < 0) { newLeft = 0; vx *= -1; } // Rebota en el borde izquierdo
-            if (newTop < 0) { newTop = 0; vy *= -1; } // Rebota en el borde superior
-            if (newLeft > screenWidth - cabraWidth) { newLeft = screenWidth - cabraWidth; vx *= -1; } // Rebota en el derecho
-            if (newTop > screenHeight - cabraHeight) { newTop = screenHeight - cabraHeight; vy *= -1; } // Rebota en el inferior
-
-            // Aplicamos la nueva posición
-            cabra.style.left = newLeft + 'px';
-            cabra.style.top = newTop + 'px';
+    function startEscapeLogic() {
+        if (!escapeInterval) {
+            document.addEventListener('mousemove', handleMouseMove);
+            escapeInterval = setInterval(updatePosition, 1000 / 60);
         }
+    }
 
-        // Funciones para iniciar y detener la lógica de escape
-        function startEscapeLogic() {
-            // Solo si no está ya funcionando
-            if (!escapeInterval) {
-                document.addEventListener('mousemove', handleMouseMove);
-                // Actualizamos la posición 60 veces por segundo (animación fluida)
-                escapeInterval = setInterval(updatePosition, 1000 / 60);
-            }
-        }
+    function stopEscapeLogic() {
+        document.removeEventListener('mousemove', handleMouseMove);
+        clearInterval(escapeInterval);
+        escapeInterval = null;
+    }
 
-        function stopEscapeLogic() {
-            document.removeEventListener('mousemove', handleMouseMove);
-            clearInterval(escapeInterval);
-            escapeInterval = null; // Reseteamos la variable
-        }
-
-        // Inicia la lógica cuando la página carga
-        startEscapeLogic();
-    </script>
+    startEscapeLogic();
+</script>
 
  <script>
     document.addEventListener('DOMContentLoaded', () => {
         const titleElement = document.getElementById('myTitle'); // O document.querySelector('.titulo-estilo');
 
         if (titleElement) {
-            // Un pequeño retraso para asegurar que el navegador ha renderizado el estado inicial
-            // antes de aplicar el estado final. A veces 50ms son suficientes.
             setTimeout(() => {
                 titleElement.classList.add('is-visible');
-            }, 100); // 100ms de retraso para que la animación se vea bien
+            }, 100);
         }
     });
 </script>
-
     
 </body>
 </html>
