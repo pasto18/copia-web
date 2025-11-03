@@ -52,60 +52,6 @@
         transform: none !important;
     }
 
-    /* --- ESTILOS DE VISIBILIDAD DE GALERÍA EN ESCRITORIO --- */
-    .mobile-gallery {
-        display: none; /* Oculta la galería móvil por defecto (escritorio) */
-    }
-    .video-container:not(.fixed-element) {
-        display: block; /* Muestra los elementos arrastrables por defecto (escritorio) */
-    }
-
-
-    /* --- ESTILOS DE VISIBILIDAD DE GALERÍA EN MÓVIL (Ancho max 768px) --- */
-    @media (max-width: 768px) {
-        .mobile-gallery {
-            display: block; /* Muestra la galería móvil en pantallas pequeñas */
-            position: fixed;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            transform: translateY(-50%);
-            overflow-x: auto;
-            overflow-y: hidden;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            padding: 20px 0;
-            z-index: 100;
-        }
-
-        .video-container:not(.fixed-element) {
-            display: none; /* Oculta los elementos arrastrables de escritorio en pantallas pequeñas */
-        }
-        
-        .mobile-gallery::-webkit-scrollbar {
-            display: none;
-        }
-
-        .mobile-gallery-container {
-            display: inline-flex;
-            gap: 20px;
-            padding: 0 20px;
-        }
-
-        .mobile-gallery-item {
-            width: 80vw;
-            height: auto;
-            flex-shrink: 0;
-        }
-
-        .mobile-gallery-item img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-    }
 </style>
 
 
@@ -129,10 +75,10 @@
 <div class="mobile-menu">
     <button class="button-1 mobile-menu-button">☰</button>
     <div class="mobile-menu-items">
-        <a class="button-1" href="#">HOME</a>
-        <a class="button-1" href="#">VIDEO</a>
-        <a class="button-1" href="#">MUSIC</a>
-        <a class="button-1" href="#">OTHERS</a>
+        <a class="button-1" href="index.html">HOME</a>
+        <a class="button-1" href="video.html">VIDEO</a>
+        <a class="button-1" href="music.html">MUSIC</a>
+        <a class="button-1" href="others.html">OTHERS</a>
     </div>
 </div>
         

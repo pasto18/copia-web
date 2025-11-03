@@ -327,14 +327,18 @@
     top: 1rem;
     scale: 1.6;
     z-index: 801;
-    /* Agregar estas propiedades para mantener la posición inicial */
     left: 0;
     right: 0;
     width: 100%;
-
-      user-select: none;
+    user-select: none;
     cursor: default;
 }
+@media (max-width: 768px) {
+    .habilidades-estilo {
+        margin-top: 92vh;
+    }
+}
+
 
 .menu-hor-estilo {
     position: fixed;
@@ -565,50 +569,56 @@ font-family: "Bricolage Grotesque", sans-serif;
     }
 }
 
-<style>
-    // ...existing styles...
-
-    /* Mobile Gallery Styles */
+    /* --- ESTILOS DE VISIBILIDAD DE GALERÍA EN ESCRITORIO --- */
     .mobile-gallery {
-        display: none;
+        display: none; /* Oculta la galería móvil por defecto (escritorio) */
+    }
+    .video-container:not(.fixed-element) {
+        display: block; /* Muestra los elementos arrastrables por defecto (escritorio) */
     }
 
+
+    /* --- ESTILOS DE VISIBILIDAD DE GALERÍA EN MÓVIL (Ancho max 768px) --- */
     @media (max-width: 768px) {
         .mobile-gallery {
-            display: block;
+            display: block; /* Muestra la galería móvil en pantallas pequeñas */
             position: fixed;
-            top: 50%;
+            top: 0%;
             left: 0;
             width: 100%;
-            transform: translateY(-50%);
+            transform: translateY(0%);
             overflow-x: auto;
             overflow-y: hidden;
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
-            padding: 20px 0;
+            padding: 10px 0;
             z-index: 100;
         }
 
+        .video-container:not(.fixed-element) {
+            display: none; /* Oculta los elementos arrastrables de escritorio en pantallas pequeñas */
+        }
+        
         .mobile-gallery::-webkit-scrollbar {
             display: none;
         }
 
         .mobile-gallery-container {
             display: inline-flex;
-            gap: 20px;
-            padding: 0 20px;
+            gap: 10px;
+            padding: 0 10px;
         }
 
         .mobile-gallery-item {
-            width: 80vw;
-            height: auto;
+            width: auto;
+            height: 100vh;
             flex-shrink: 0;
         }
 
         .mobile-gallery-item img {
             width: 100%;
-            height: auto;
+            height: 100vh;
             object-fit: contain;
             border-radius: 8px;
         }
