@@ -736,7 +736,7 @@ display: none; /* Oculta el GIF en pantallas pequeñas */
     .mobile-scrolling-copia {
         display: block; 
         position: fixed;
-        top: 3vh; /* Ajusta la posición vertical */
+        top: 0vh; /* Ajusta la posición vertical */
         left: 0;
         width: 100%; 
         overflow: hidden; /* Oculta el contenido que desborda la pantalla */
@@ -760,7 +760,7 @@ display: none; /* Oculta el GIF en pantallas pequeñas */
         text-transform: uppercase;
         letter-spacing: -2px; 
         text-shadow: rgba(255, 0, 0, 0.91) .3rem .4rem; 
-        font-size: 25vw;
+        font-size: 30vw;
 
         /* --- Aplicación de la animación --- */
         /* Nombre | Duración | Tipo (velocidad constante) | Repetición */

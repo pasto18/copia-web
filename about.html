@@ -49,8 +49,39 @@
             cursor: pointer; /* Indica que es clickeable */
             border-radius: 8px; /* Bordes redondeados */
         }
+        @media (max-width: 768px) {
+            .image-wrapper {
+                /* Estilos específicos para pantallas pequeñas */
+                display: none;
+            }
+        }
 
         .image-wrapper img {
+            display: block;
+            width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+            height: auto; /* Mantiene la proporción */
+            transition: transform 0.3s ease; /* Transición para el zoom en hover */
+        }
+
+
+         .image-wrapper-2 {
+            display: none;
+        }
+
+
+@media (max-width: 768px) {
+            .image-wrapper-2 {
+             position: absolute; /* Para posicionar libremente en la página */
+            height: auto; /* La altura se ajustará automáticamente */
+            overflow: hidden; /* Asegura que cualquier desbordamiento esté contenido */
+            transition: transform 0.3s ease; /* Transición suave al pasar el ratón */
+            cursor: pointer; /* Indica que es clickeable */
+            border-radius: 8px; /* Bordes redondeados */
+            display: block;
+            }   
+    }
+
+  .image-wrapper-2 img {
             display: block;
             width: 100%; /* La imagen ocupa todo el ancho del contenedor */
             height: auto; /* Mantiene la proporción */
@@ -112,14 +143,17 @@
     }
 
     @media (max-width: 768px) {
-        .about-text {
-            width: 100%; /* Mobile width */
-            top: 15%;
-            left: 0;
-            padding: 20px;
-            text-align: left;
-        }
+    .about-text {
+        width: 90%; /* Mobile width */
+        position: absolute;
+        top: 15%;
+        left: 50%; /* Changed from 0 */
+        transform: translateX(-50%); /* Added to center */
+        padding: 20px;
+        text-align: left;
+        box-sizing: border-box;
     }
+}   
 </style>
 
 
@@ -157,9 +191,6 @@
 
 
 
-<div class="habilidades-estilo fixed-element">
-    <span class="button-2 heartbeat-1">WHO?</span>
-</div>
         
 
 
@@ -172,11 +203,16 @@
 
 
 <div class="image-wrapper"  style="top: 20%; right: 5%; z-index: 800; rotate: 10deg; width: 30%;">
-        <img src="https://res.cloudinary.com/djddsm416/image/upload/v1754605395/COPIA-perfil_LOW_odpsxz.jpg" alt="The Posttraumatic" >
+        <img src="https://res.cloudinary.com/djddsm416/image/upload/v1754605395/COPIA-perfil_LOW_odpsxz.jpg" >
     </div>
 
+
 <div class="image-wrapper"   style="top: 80%; left: 5%; z-index: 800; rotate: -7deg; width: 25%;">
-        <img src="https://res.cloudinary.com/djddsm416/image/upload/v1755122151/06c96ed1-3529-4253-aa3d-5b87363ffa60_mja7rj.jpg" alt="The Posttraumatic" >
+        <img src="https://res.cloudinary.com/djddsm416/image/upload/v1755122151/06c96ed1-3529-4253-aa3d-5b87363ffa60_mja7rj.jpg">
+    </div>
+
+<div class="image-wrapper-2"   style="bottom: -50%; left: 50%; transform: translateX(-50%); z-index: 800; width: 90%;">
+        <img src="https://res.cloudinary.com/djddsm416/image/upload/v1755122151/06c96ed1-3529-4253-aa3d-5b87363ffa60_mja7rj.jpg">
     </div>
 
 
@@ -192,6 +228,8 @@
     <br><br>
     For more information call me +34 631889288 <br>and say "Hello" so I know it's not a machine.
     <br>or email me at <a href="mailto:lisandromarq18@gmail.com">lisandromarq18@gmail.com</a> if you are a shy person.
+
+
 </div>
 
 <div style="position: absolute; bottom: 5%; right: 15%; z-index: 800; rotate: 3deg;">
@@ -208,7 +246,7 @@
     <div class="image-wrapper" style="width: 230px; height: auto;">
         <video src="https://res.cloudinary.com/djddsm416/video/upload/v1755123652/a43a10b9-f8d3-4bb6-9fc3-9b0d6ba551f7_qq7dow.mp4"
         autoplay loop muted playsinline style="width: 100%; border-radius: 8px;"></video>
-        <div class="text-1" style="position: absolute; top: 80%; left: 50%; transform: translate(-50%, -50%) scale(1.5); z-index: 1001; background: #ff0000; color: #fff700; white-space: nowrap;">
+        <div class="text-1" style="position: absolute; top: 80%; left: 50%; transform: translate(-50%, -50%) scale(1); z-index: 1001; background: #ff0000; color: #fff700; white-space: nowrap;">
             CREATIVE PROCESS
         </div>
     </div>
@@ -221,83 +259,7 @@
 
 
 
-<!-- Imagen voladora animada -->
 
-<script>
-    // Configuración editable
-    let objectSize = 4a0; // px
-    let moveSpeed = 12; // px por frame
-    let rotateSpeed = 2; // grados por frame
-    let angle = 30; // grados respecto a la horizontal (0 = horizontal)
-    let pauseTime = 1000; // ms de pausa entre vuelos
-
-    // Referencia al objeto
-    const flyingObject = document.getElementById('flying-object');
-    flyingObject.style.width = objectSize + 'px';
-
-    // Estado
-    let direction = Math.random() > 0.5 ? 1 : -1; // 1: derecha, -1: izquierda
-    let posY = Math.random() * (window.innerHeight - objectSize);
-    let posX = direction === 1 ? -objectSize : window.innerWidth;
-    let rotation = 0;
-    let paused = false;
-
-    function resetObject() {
-        direction = Math.random() > 0.5 ? 1 : -1;
-        posY = Math.random() * (window.innerHeight - objectSize);
-        posX = direction === 1 ? -objectSize : window.innerWidth;
-        flyingObject.style.width = objectSize + 'px';
-    }
-
-    function animateFlyingObject() {
-        if (paused) return;
-
-        // Calcula movimiento según ángulo
-        const rad = angle * Math.PI / 180;
-        posX += moveSpeed * direction * Math.cos(rad);
-        posY += moveSpeed * direction * Math.sin(rad);
-        rotation += rotateSpeed * direction;
-
-        // Aplica estilos
-        flyingObject.style.top = posY + 'px';
-        flyingObject.style.left = posX + 'px';
-        flyingObject.style.transform = `rotate(${rotation}deg)`;
-
-        // Si sale de la pantalla, reinicia por el otro lado con pausa
-        // Ajuste: usa -objectSize en vez de 0 para el borde superior
-        const outX = (direction === 1 && posX > window.innerWidth) || (direction === -1 && posX < -objectSize);
-        const outY = (posY < -objectSize || posY > window.innerHeight);
-
-        if (outX || outY) {
-            paused = true;
-            setTimeout(() => {
-                resetObject();
-                paused = false;
-                animateFlyingObject();
-            }, pauseTime);
-            return;
-        }
-
-        requestAnimationFrame(animateFlyingObject);
-    }
-
-    // Permite cambiar tamaño, velocidades, ángulo y pausa desde consola
-    window.setFlyingObjectConfig = function({size, move, rotate, angle: ang, pause}) {
-        if (size) objectSize = size;
-        if (move) moveSpeed = move;
-        if (rotate) rotateSpeed = rotate;
-        if (typeof ang === 'number') angle = ang;
-        if (typeof pause === 'number') pauseTime = pause;
-        flyingObject.style.width = objectSize + 'px';
-    };
-
-    resetObject();
-    animateFlyingObject();
-</script>
-<!-- 
-Para cambiar tamaño, velocidad, rotación, ángulo o pausa desde consola:
-setFlyingObjectConfig({size: 200, move: 5, rotate: 10, angle: 30, pause: 2000});
--->
 
 <script>
         document.addEventListener('DOMContentLoaded', () => {
