@@ -303,7 +303,7 @@
 /* --- Adaptaciones para Móvil --- */
 @media (max-width: 768px) {
     .titulo-estilo {
-        position: relative !important;
+        position:relative !important;
         /* Centrado y posicionamiento */
         top: 0px; /* Un pequeño margen superior */
         right: 1rem;
