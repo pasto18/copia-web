@@ -58,7 +58,6 @@
     justify-content: left; /* Centra los spans horizontalmente */
     gap: .5rem;
     scale:180%;             /* Espacio uniforme entre todos los spans/botones */
-    
     width: 6%; /* Para que ocupe todo el ancho disponible del .titulo-estilo */
 }
 
@@ -304,15 +303,14 @@
 /* --- Adaptaciones para Móvil --- */
 @media (max-width: 768px) {
     .titulo-estilo {
+        position: relative !important;
         /* Centrado y posicionamiento */
-        left: 50%;
         top: 0px; /* Un pequeño margen superior */
-        transform: translateX(-50%); /* Truco para centrar con position: fixed */
-        
+        right: 1rem;
         /* Ajustes de tamaño y márgenes */
         width: 100%; /* Ocupa todo el ancho para centrar el texto */
-        text-align: center; /* Centra el texto dentro del contenedor */
-        font-size: 6rem; /* Tamaño de fuente reducido para móviles */
+        text-align: right; /* Centra el texto dentro del contenedor */
+        font-size: 20vw; /* Tamaño de fuente reducido para móviles */
         margin: 0;
         letter-spacing: -2px; /* Menos espaciado negativo para mejor legibilidad */
         text-shadow: rgba(255, 0, 0, 0.91) .3rem .4rem; /* Sombra de texto más sutil */
@@ -533,8 +531,8 @@ font-family: "Bricolage Grotesque", sans-serif;
     .mobile-menu {
         display: block;
         position: fixed;
-        top: 20px;
-        left: 20px;
+        top: 10px;
+        left: 10px;
         z-index: 1000;
     }
 
@@ -544,7 +542,7 @@ font-family: "Bricolage Grotesque", sans-serif;
         filter: none; /* Removes the shadow effect */
         background: #e3ec3d;
         border-color: #ff0000;
-        border-width: 0.2rem;
+        border-width: 0rem;
         cursor: pointer;
     }
 }
