@@ -22,31 +22,31 @@
     margin-top: 30px;
 }
 
- 	.no-select {
-            user-select: none;
-        }
+.no-select {
+    user-select: none;
+}
 
-    .draggable {
-            position: absolute;
-            cursor: grab;
-            /* Ponemos las imágenes en posiciones iniciales distintas para que no se apilen */
-            z-index: 10; /* z-index por defecto */
-			border-radius: 22px;
-    	max-width: 90%;
-    	height: auto;
-    	margin-top: 30px;
-        }
+.draggable {
+    position: absolute;
+    cursor: grab;
+    /* Ponemos las imágenes en posiciones iniciales distintas para que no se apilen */
+    z-index: 10; /* z-index por defecto */
+    border-radius: 22px;
+    max-width: 90%;
+    height: auto;
+    margin-top: 30px;
+}
         
-        /* Estilos para cuando una imagen se está arrastrando */
-    .dragging {
-            cursor: grabbing;
-            z-index: 20; /* Se pone por encima de las demás */
-            transform: scale(1.05); /* Efecto de 'levantar' */
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-            transition: transform 0.4s, box-shadow 0.2s;
-        }
+/* Estilos para cuando una imagen se está arrastrando */
+.dragging {
+    cursor: grabbing;
+    z-index: 20; /* Se pone por encima de las demás */
+    transform: scale(1.05); /* Efecto de 'levantar' */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    transition: transform 0.4s, box-shadow 0.2s;
+}
 
-	.menu-estilo {
+.menu-estilo {
 
     /* Si quieres que los botones de habilidades tengan una disposición específica: */
     position: absolute;
@@ -55,9 +55,11 @@
     margin-left: 59px;
     flex-wrap: wrap;
     top:35%;
-    justify-content: left; /* Centra los spans horizontalmente */
+    /* CORRECCIÓN: 'left' no es un valor válido para justify-content, se usa 'flex-start' */
+    justify-content: flex-start; 
     gap: .5rem;
-    scale:180%;             /* Espacio uniforme entre todos los spans/botones */
+    /* CORRECCIÓN: Usar 'transform: scale()' en lugar de 'scale: 180%' para mejor compatibilidad */
+    transform: scale(1.8);
     width: 6%; /* Para que ocupe todo el ancho disponible del .titulo-estilo */
 }
 
@@ -166,7 +168,7 @@
 	background: #ffd500;
 	text-decoration: none;
 
-      user-select: none;
+    user-select: none;
     cursor: default;
 
 }
@@ -210,7 +212,7 @@
 	background: #ff0000;
 	text-decoration: none;
 
-      user-select: none;
+    user-select: none;
     cursor: default;
 
 }
@@ -255,7 +257,7 @@
 	background: #ff0000;
 	text-decoration: none;
 
-      user-select: none;
+    user-select: none;
     cursor: default;
 
 }
@@ -275,7 +277,9 @@
     z-index: 900;
     
     /* --- Escala y Transformaciones --- */
-    transform: translateX(2%); /* Ajusta el valor negativo de translateY */    transform-origin: top left;
+    /* CORRECCIÓN: Se añade punto y coma (;) después de translateX(2%) */
+    transform: translateX(2%); /* Ajusta el valor negativo de translateY */
+    transform-origin: top left;
     font-size: clamp(3rem, 12vw, 11rem);
 
     /* --- Estilos de Fuente y Texto (serán heredados por los hijos) --- */
@@ -302,7 +306,8 @@
 /* --- Adaptaciones para Móvil --- */
 @media (max-width: 768px) {
     .titulo-estilo {
-        position: relative !important; /* Mantener absolute en móvil */
+        /* CORRECCIÓN: Se cambia a 'absolute' para ser consistente con el comportamiento en el escritorio y la nota del autor */
+        position: absolute !important; 
         top: -10px;
         right: 1rem;
         /* Ajustes de tamaño y márgenes */
@@ -411,13 +416,14 @@
     color: #000000;
 	font-family: "Bricolage Grotesque", sans-serif;
   	font-optical-sizing: auto;
-  	font-weight: <weight>;
+    /* CORRECCIÓN: <weight> es un placeholder inválido. Se cambia a un valor numérico. */
+  	font-weight: 700;
   	font-style: normal;
   	font-variation-settings:"wdth" 100;
     background: #00fff9;
-    padding: 0px 2px; /* Reducido el padding vertical a 0px */
+    padding: 0px 2px; 
     border-radius: 0px;
-	padding: -10px 2px;  /* Reducido el padding vertical a -5px */
+    /* CORRECCIÓN: Se elimina el padding negativo, ya que es inválido en CSS y redundante con el anterior. */
     line-height: .85;     /* Añadido line-height para comprimir verticalmente */
 
     font-size: 18px;
@@ -433,12 +439,14 @@
     width: calc(100% - 15px); /* Ajustado para considerar los márgenes */
     box-sizing: border-box;
     color: #fbff00;
-font-family: "Bricolage Grotesque", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-  font-variation-settings:"wdth" 100;
-	padding: -5px 2px;  /* Reducido el padding vertical a -5px */
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-optical-sizing: auto;
+    /* CORRECCIÓN: <weight> es un placeholder inválido. Se cambia a un valor numérico. */
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings:"wdth" 100;
+    /* CORRECCIÓN: Se cambia el padding negativo por un padding válido. */
+	padding: 0 2px;
     border-radius: 0px;
     font-size: 20px;
 }
@@ -477,9 +485,9 @@ font-family: "Bricolage Grotesque", sans-serif;
 @media (max-width: 768px) {
     .info-container {
         /* 1. Posiciona el contenedor en la parte inferior y que ocupe todo el ancho */
-        position: fixed;
+        position: absolute ;
         bottom: 0;
-        left: 0;
+        transform: translateX(-45%);
         width: 100%;
         padding: 15px;
         box-sizing: border-box;
@@ -522,6 +530,15 @@ font-family: "Bricolage Grotesque", sans-serif;
     }
 }
 
+.gif-container {
+}
+
+@media (max-width: 768px) {
+    .gif-container {
+display: none; /* Oculta el GIF en pantallas pequeñas */
+    }
+}
+
 /* Add these styles after your existing .menu-hor-estilo media query */
 
 .mobile-menu {
@@ -543,10 +560,10 @@ font-family: "Bricolage Grotesque", sans-serif;
         filter: none; /* Removes the shadow effect */
         background: #e3ec3d;
         border-color: #ff0000;
-        border-width: 0rem;
+        /* CORRECCIÓN: 0rem debe ser un valor numérico para border-width, por ejemplo 0 */
+        border-width: 0; 
         cursor: pointer;
     }
-}
 
     .mobile-menu-items {
         display: none;
@@ -562,136 +579,194 @@ font-family: "Bricolage Grotesque", sans-serif;
         display: flex;
     }
 
-    /* Hide horizontal menu on mobile */
-    .menu-hor-estilo {
+    /* Hide horizontal menu on mobile - REDUNDANTE, ya definido antes en el media query. Se mantiene la estructura por si hay otros estilos en el media query original. */
+    /* .menu-hor-estilo {
         display: none;
+    } */
+} 
+/* CORRECCIÓN: Se ha eliminado un corchete de cierre (}) extra que estaba causando un error de sintaxis en todo el código posterior. */
+
+/* --- ESTILOS DE VISIBILIDAD DE GALERÍA EN ESCRITORIO --- */
+.mobile-gallery {
+    display: none; /* Oculta la galería móvil por defecto (escritorio) */
+}
+.video-container:not(.fixed-element) {
+    display: block; /* Muestra los elementos arrastrables por defecto (escritorio) */
+}
+
+
+/* --- ESTILOS DE VISIBILIDAD DE GALERÍA EN MÓVIL (Ancho max 768px) --- */
+@media (max-width: 768px) {
+    .mobile-gallery {
+        display: block; /* Muestra la galería móvil en pantallas pequeñas */
+        position: fixed;
+        top: 0%;
+        left: 0;
+        width: 100%;
+        transform: translateY(0%);
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 10px 0;
+        z-index: 100;
+    }
+
+    .video-container:not(.fixed-element) {
+        display: none; /* Oculta los elementos arrastrables de escritorio en pantallas pequeñas */
+    }
+    
+    .mobile-gallery::-webkit-scrollbar {
+        display: none;
+    }
+
+    .mobile-gallery-container {
+        display: inline-flex;
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    .mobile-gallery-item {
+        width: auto;
+        height: 100vh;
+        flex-shrink: 0;
+    }
+
+    .mobile-gallery-item img {
+        width: 100%;
+        height: 100vh;
+        object-fit: contain;
+        border-radius: 8px;
     }
 }
 
-    /* --- ESTILOS DE VISIBILIDAD DE GALERÍA EN ESCRITORIO --- */
-    .mobile-gallery {
-        display: none; /* Oculta la galería móvil por defecto (escritorio) */
-    }
+/* Mobile Video Gallery Styles */
+.mobile-video-gallery {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    /* Hide desktop videos */
     .video-container:not(.fixed-element) {
-        display: block; /* Muestra los elementos arrastrables por defecto (escritorio) */
-    }
-
-
-    /* --- ESTILOS DE VISIBILIDAD DE GALERÍA EN MÓVIL (Ancho max 768px) --- */
-    @media (max-width: 768px) {
-        .mobile-gallery {
-            display: block; /* Muestra la galería móvil en pantallas pequeñas */
-            position: fixed;
-            top: 0%;
-            left: 0;
-            width: 100%;
-            transform: translateY(0%);
-            overflow-x: auto;
-            overflow-y: hidden;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            padding: 10px 0;
-            z-index: 100;
-        }
-
-        .video-container:not(.fixed-element) {
-            display: none; /* Oculta los elementos arrastrables de escritorio en pantallas pequeñas */
-        }
-        
-        .mobile-gallery::-webkit-scrollbar {
-            display: none;
-        }
-
-        .mobile-gallery-container {
-            display: inline-flex;
-            gap: 10px;
-            padding: 0 10px;
-        }
-
-        .mobile-gallery-item {
-            width: auto;
-            height: 100vh;
-            flex-shrink: 0;
-        }
-
-        .mobile-gallery-item img {
-            width: 100%;
-            height: 100vh;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-    }
-
-    /* Mobile Video Gallery Styles */
-    .mobile-video-gallery {
         display: none;
     }
 
-    @media (max-width: 768px) {
-        /* Hide desktop videos */
-        .video-container:not(.fixed-element) {
-            display: none;
-        }
-
-        .mobile-video-gallery {
-            display: block;
-            position: fixed;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            transform: translateY(-50%);
-            z-index: 100;
-        }
-
-        .mobile-video-container {
-            width: 100%;
-            height: auto;
-            overflow-x: auto;
-            overflow-y: hidden;
-            white-space: nowrap;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            padding: 20px 0;
-        }
-
-        .mobile-video-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .mobile-video-item {
-            display: inline-block;
-            width: 85vw;
-            margin-right: 20px;
-            vertical-align: top;
-        }
-
-        .mobile-video-item video {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .mobile-video-caption {
-            position: fixed;
-            bottom: 60px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            color: white;
-            font-size: 1.2rem;
-            z-index: 101;
-        }
-
-        .mobile-video-secondary-caption {
-            position: fixed;
-            bottom: 40px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            color: white;
-            font-size: 0.9rem;
-            opacity: 0.8;
-            z-index: 101;
-        }
+    .mobile-video-gallery {
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        transform: translateY(-50%);
+        z-index: 100;
     }
+
+    .mobile-video-container {
+        width: 100%;
+        height: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        padding: 20px 0;
+    }
+
+    .mobile-video-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .mobile-video-item {
+        display: inline-block;
+        width: 85vw;
+        margin-right: 20px;
+        vertical-align: top;
+    }
+
+    .mobile-video-item video {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .mobile-video-caption {
+        position: fixed;
+        bottom: 60px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: white;
+        font-size: 1.2rem;
+        z-index: 101;
+    }
+
+    .mobile-video-secondary-caption {
+        position: fixed;
+        bottom: 40px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: white;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        z-index: 101;
+    }
+}
+
+/* ======================================= */
+/* === Animación de Texto Móvil (COPIA) === */
+/* ======================================= */
+
+/* 1. Define la animación de desplazamiento CONTINUA */
+@keyframes scroll-copia-continuous {
+    /* Inicia el texto justo fuera del borde derecho de la pantalla */
+    0% { transform: translateX(100vw); } 
+    /* Termina el texto justo fuera del borde izquierdo de la pantalla */
+    100% { transform: translateX(-100%); } 
+}
+
+/* 2. Estilo base (oculto en escritorio) */
+.mobile-scrolling-copia {
+    display: none;
+}
+
+/* 3. Muestra y aplica la animación solo en dispositivos móviles */
+@media (max-width: 768px) {
+    .mobile-scrolling-copia {
+        display: block; 
+        position: fixed;
+        top: 3vh; /* Ajusta la posición vertical */
+        left: 0;
+        width: 100%; 
+        overflow: hidden; /* Oculta el contenido que desborda la pantalla */
+        pointer-events: none;
+        z-index: 1000;
+    }
+    
+    /* El elemento que contiene el texto y la animación */
+    .mobile-scrolling-copia-content {
+        white-space: nowrap; /* Mantiene todo en una línea */
+        display: inline-block; /* Permite que el ancho se ajuste al contenido */
+
+        /* Duplicamos el texto para asegurar una repetición visual */
+        content: 'COPIA COPIA COPIA COPIA COPIA COPIA';
+
+        /* --- Estilos heredados/ajustados de .titulo-estilo --- */
+        font-family: "VHS", system-ui;
+        font-weight: 100;
+        font-style: normal;
+        color: #e6ff00;
+        text-transform: uppercase;
+        letter-spacing: -2px; 
+        text-shadow: rgba(255, 0, 0, 0.91) .3rem .4rem; 
+        font-size: 25vw;
+
+        /* --- Aplicación de la animación --- */
+        /* Nombre | Duración | Tipo (velocidad constante) | Repetición */
+        /* Duración de 15s para un movimiento suave */
+        animation: scroll-copia-continuous 20s linear infinite; 
+    }
+    
+    /* Pseudo-elemento para el texto (usaremos ::before o ::after si el texto fuera más simple, pero es mejor hacerlo en el HTML) */
+}

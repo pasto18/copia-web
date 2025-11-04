@@ -65,17 +65,32 @@
                 display: none;
             }
         }
+
+        @media (max-width: 768px) {
+            .titulo-estilo {
+                display: none;
+            }
     </style>
 </head>
+
+
+
+
 <body>
     <video class="background-video" autoplay loop muted playsinline>
         <source src="https://res.cloudinary.com/djddsm416/video/upload/v1754604890/TV_STATIC_4K_60FPS_bjfnpa.mp4" type="video/mp4">
     </video>
 
-       <div class="titulo-estilo">
+       <div class="titulo-estilo" style="transform: translateX(-10%);">
         COPIA
     </div>
     
+<!-- ESTO SOLO ES VISIBLE EN MÓVIL Y TIENE LA ANIMACIÓN DE SCROLL CONTINUO -->
+<div class="mobile-scrolling-copia">
+    <span class="mobile-scrolling-copia-content">
+        COPIA COPIA COPIA COPIA COPIA COPIA COPIA COPIA COPIA COPIA COPIA COPIA
+    </span>
+</div>    
     <div class="menu-estilo">
             <a class="button-1" href="video.html" rel="history">VIDEO</a>
             <a class="button-1" href="img.html" rel="history">IMG</a>
@@ -123,7 +138,7 @@
     </a>
     <!-- Fin de elementos de la cabra -->
 
-    <div style="position: absolute; top: 19px; right: 3%; max-width: 18%; z-index: 1; rotate: 2deg;">
+    <div class="gif-container" style="position: absolute; top: 19px; right: 3%; max-width: 18%; z-index: 1; rotate: 2deg;">
         <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmxqazE1YnNhanNndjRlczc2c3Y1czZ4NWJlM204dWtsMWJuamhtaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UYkZqHsvhhQVW/giphy.gif"
              style="max-width: 100%; display: block; cursor: pointer;">
         <span class="text-1" id="stolen-gift-text" style="display: none; position: absolute; top: 0; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 1.3vw;">stolen gift</span>
