@@ -232,7 +232,7 @@
 
 
 .text-1 {
-	font-size: .8rem;
+	font-size: 1.4rem;
 	font-family: "Quicksand", sans-serif;
   	font-optical-sizing: auto;
   	font-weight: 700;
@@ -268,8 +268,7 @@
 
 
 .titulo-estilo {
-    /* --- Posicionamiento y comportamiento Sticky --- */
-    position: fixed;
+    position: absolute; /* Cambiado de fixed a absolute */
     margin-left: 1.5rem;
     margin-top: -3rem;
     top: 0; 
@@ -303,9 +302,8 @@
 /* --- Adaptaciones para Móvil --- */
 @media (max-width: 768px) {
     .titulo-estilo {
-        position:relative !important;
-        /* Centrado y posicionamiento */
-        top: 0px; /* Un pequeño margen superior */
+        position: relative !important; /* Mantener absolute en móvil */
+        top: -10px;
         right: 1rem;
         /* Ajustes de tamaño y márgenes */
         width: 100%; /* Ocupa todo el ancho para centrar el texto */
@@ -333,7 +331,10 @@
 }
 @media (max-width: 768px) {
     .habilidades-estilo {
-        margin-top: 92vh;
+        margin-top: 93vh;
+        scale: 1;
+        margin-left: 1%;
+
     }
 }
 

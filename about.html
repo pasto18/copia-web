@@ -100,6 +100,29 @@
         .image-wrapper:hover img {
             transform: scale(1.05); /* Ligeramente más grande al pasar el ratón */
         }
+
+    .about-text {
+        position: absolute;
+        top: 45%;
+        left: 3%;
+        z-index: 800;
+        width: 60%; /* Desktop width */
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+        .about-text {
+            width: 100%; /* Mobile width */
+            top: 15%;
+            left: 0;
+            padding: 20px;
+            text-align: left;
+        }
+    }
+</style>
+
+
 </style>
 </head>
 <body>
@@ -114,10 +137,18 @@
         <a class="button-1" href="img.html" rel="history">IMG</a>
         <a class="button-1" href="music.html" rel="history">MUSIC</a>
         <a class="button-1" href="others.html" rel="history">OTHERS</a>
-
-            
-    
         </div>
+
+
+<div class="mobile-menu">
+    <button class="button-1 mobile-menu-button">☰</button>
+    <div class="mobile-menu-items">
+        <a class="button-1" href="index.html">HOME</a>
+        <a class="button-1" href="video.html">VIDEO</a>
+        <a class="button-1" href="imgc.html">IMG</a>
+        <a class="button-1" href="music.html">MUSIC</a>
+    </div>
+</div>        
 
 
 <div class="titulo-estilo fixed-element">
@@ -149,8 +180,8 @@
     </div>
 
 
-<div class="text-1" style="position: absolute; top: 45%; left: 17%; scale: 200%; z-index: 800;">
-HUMAN based in BARCELONA. No criminal record, yet.
+<div class="about-text text-1">
+    HUMAN based in BARCELONA. No criminal record, yet.
     <br>
     I like image and sounds, and the combination of both.
     <br>
@@ -192,12 +223,7 @@ HUMAN based in BARCELONA. No criminal record, yet.
 
 
 <!-- Imagen voladora animada -->
-<img 
-    id="flying-object"
-    src="https://res.cloudinary.com/djddsm416/image/upload/v1755123987/vichy_px6m73.png"
-    alt="Flying Object"
-    style="position: fixed; top: 50%; left: 0; width: 120px; height: auto; z-index: 9999; pointer-events: none;"
->
+
 <script>
     // Configuración editable
     let objectSize = 4a0; // px
@@ -288,6 +314,25 @@ setFlyingObjectConfig({size: 200, move: 5, rotate: 10, angle: 30, pause: 2000});
                 });
             });
         });
+
+
+
+ // --- Lógica del Menú Móvil ---
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuButton = document.querySelector('.mobile-menu-button');
+        const menuItems = document.querySelector('.mobile-menu-items');
+
+        if (menuButton && menuItems) {
+            menuButton.addEventListener('click', function() {
+                menuItems.classList.toggle('active');
+            });
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.mobile-menu')) {
+                    menuItems.classList.remove('active');
+                }
+            });
+        }
+    });
     </script>
 
 
